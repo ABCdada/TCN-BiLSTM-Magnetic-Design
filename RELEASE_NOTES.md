@@ -1,4 +1,4 @@
-# Release v1.3.1
+# Release v1.3.2
 
 This release packages the TCN-BiLSTM scientific inference API together with the
 separate four-grade browser cold-start family used by Design Center and Test
@@ -9,6 +9,10 @@ matches the reference Design Center's raw display-sample and H-dB integration
 workflow, and narrows the public design page to the single-phase full bridge.
 Toroidal `R`, `r`, and `d` dimensions are now independently editable, and the
 diagram and documentation no longer imply fixed geometry ratios.
+
+Version 1.3.2 also fixes installed-wheel resource discovery so the application
+can find its packaged templates, static assets, result files, licenses, and
+checkpoint manifests when imported outside a source checkout.
 
 ## Included
 

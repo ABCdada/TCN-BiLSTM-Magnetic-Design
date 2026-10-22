@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This guide deploys release 1.3.1 as an inference service. The application is
+This guide deploys release 1.3.2 as an inference service. The application is
 not a browser-based training service: `/api/upload` and `/api/finetune` are
 deliberately disabled, and production deployments should treat model files and
 their manifests as immutable release artifacts.
@@ -150,7 +150,7 @@ health check.
 docker build \
   --build-arg TORCH_VERSION=2.8.0 \
   --build-arg TORCH_INDEX_URL=https://download.pytorch.org/whl/cpu \
-  -t tcn-bilstm-magnetic:1.3.1 .
+  -t tcn-bilstm-magnetic:1.3.2 .
 
 docker run --rm \
   --name tcn-bilstm-magnetic \
@@ -159,7 +159,7 @@ docker run --rm \
   -e MAGNET_DEVICE=cpu \
   -e MAGNET_MODEL_DIR=/app/weights \
   -e MAGNET_COLD_START_MODEL_DIR=/app/weights \
-  tcn-bilstm-magnetic:1.3.1
+  tcn-bilstm-magnetic:1.3.2
 ```
 
 On PowerShell, resolve the mount source before invoking Docker:
@@ -172,7 +172,7 @@ docker run --rm --name tcn-bilstm-magnetic `
   -e MAGNET_DEVICE=cpu `
   -e MAGNET_MODEL_DIR=/app/weights `
   -e MAGNET_COLD_START_MODEL_DIR=/app/weights `
-  tcn-bilstm-magnetic:1.3.1
+  tcn-bilstm-magnetic:1.3.2
 ```
 
 For CUDA, use a CUDA-compatible base/runtime and PyTorch wheel, pass the GPU to

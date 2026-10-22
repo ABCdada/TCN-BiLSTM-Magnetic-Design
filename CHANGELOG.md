@@ -5,6 +5,15 @@ based on Keep a Changelog, and versions follow Semantic Versioning where possibl
 
 ## [Unreleased]
 
+## [1.3.2] - 2026-10-22
+
+### Fixed
+
+- Installed wheels now locate templates, static assets, results, licenses, and
+  both checkpoint manifests under the packaged shared-data directory. Source
+  checkouts and explicit model-directory environment variables retain their
+  existing precedence.
+
 ## [1.3.1] - 2026-10-22
 
 ### Added

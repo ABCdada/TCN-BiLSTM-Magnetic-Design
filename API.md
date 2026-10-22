@@ -1,6 +1,6 @@
 # HTTP API Reference
 
-This document describes the routes implemented by release 1.3.1. Examples use
+This document describes the routes implemented by release 1.3.2. Examples use
 `http://127.0.0.1:8000`; replace that origin with the deployment's HTTPS origin
 when calling a remote service.
 
@@ -43,7 +43,7 @@ curl --fail http://127.0.0.1:8000/health
 ```json
 {
   "status": "ok",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "device": "cpu",
   "loaded_models": [],
   "available_models": ["A", "B", "C", "D", "E"],

@@ -23,7 +23,7 @@ Before the first push:
 - run `python -m pytest -q` (tests that require absent checkpoints should be
   skipped or report model unavailability as documented);
 - verify the outer archive hashes in `RELEASE_SHA256SUMS.txt`;
-- push the source tree, create tag `v1.3.1`, and attach authorized binary assets
+- push the source tree, create tag `v1.3.2`, and attach authorized binary assets
   to the GitHub Release rather than ordinary Git history.
 
 If checkpoints must live in the repository, use Git LFS and explicitly track
@@ -34,12 +34,12 @@ Suggested first publication commands:
 ```bash
 git init
 git add .
-git commit -m "Release v1.3.1"
+git commit -m "Release v1.3.2"
 git branch -M main
 git remote add origin https://github.com/ABCdada/TCN-BiLSTM-Magnetic-Design.git
 git push -u origin main
-git tag -a v1.3.1 -m "v1.3.1"
-git push origin v1.3.1
+git tag -a v1.3.2 -m "v1.3.2"
+git push origin v1.3.2
 ```
 
 Do not copy the reference project's checkpoints, author identity, fixed hosting

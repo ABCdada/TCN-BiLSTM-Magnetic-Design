@@ -15,7 +15,7 @@ authors:
     family-names: Wang
   - given-names: Yuqi
     family-names: Wei
-version: 1.3.1
+version: 1.3.2
 date-released: 2026-10-22
 repository-code: https://github.com/ABCdada/TCN-BiLSTM-Magnetic-Design
 url: https://github.com/ABCdada/TCN-BiLSTM-Magnetic-Design

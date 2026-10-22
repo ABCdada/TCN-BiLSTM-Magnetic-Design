@@ -46,6 +46,11 @@ def create_app(config: dict | None = None) -> Flask:
         if (source_root / "results").is_dir()
         else installed_root
     )
+    weights_root = (
+        source_root / "weights"
+        if (source_root / "weights").is_dir()
+        else installed_root / "weights"
+    )
     application = Flask(
         __name__,
         template_folder=str(template_root),
@@ -58,15 +63,22 @@ def create_app(config: dict | None = None) -> Flask:
     if config:
         application.config.update(config)
 
+    model_dir = application.config.get("MODEL_DIR")
+    if model_dir is None and "MAGNET_MODEL_DIR" not in os.environ:
+        model_dir = weights_root
     manager = ModelManager(
-        model_dir=application.config.get("MODEL_DIR"),
+        model_dir=model_dir,
         device=application.config.get("MODEL_DEVICE"),
     )
     service = InferenceService(manager)
     application.extensions["magnetic_service"] = service
+    cold_model_dir = application.config.get("COLD_MODEL_DIR") or model_dir
+    if "MAGNET_COLD_START_MODEL_DIR" in os.environ:
+        cold_model_dir = None
+    elif "MAGNET_MODEL_DIR" in os.environ and application.config.get("COLD_MODEL_DIR") is None:
+        cold_model_dir = os.environ["MAGNET_MODEL_DIR"]
     cold_manager = ModelManager(
-        model_dir=application.config.get("COLD_MODEL_DIR")
-        or application.config.get("MODEL_DIR"),
+        model_dir=cold_model_dir,
         device=application.config.get("MODEL_DEVICE"),
         registry=COLD_START_MATERIALS,
         manifest_filename="cold_start_manifest.json",
@@ -198,7 +210,7 @@ def create_app(config: dict | None = None) -> Flask:
         return jsonify(
             {
                 "status": "ok",
-                "version": "1.3.1",
+                "version": "1.3.2",
                 "device": str(service.manager.device),
                 "loaded_models": service.manager.loaded_materials,
                 "available_models": [item["id"] for item in models if item["available"]],
