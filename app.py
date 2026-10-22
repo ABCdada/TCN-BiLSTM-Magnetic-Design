@@ -72,11 +72,11 @@ def create_app(config: dict | None = None) -> Flask:
     )
     service = InferenceService(manager)
     application.extensions["magnetic_service"] = service
-    cold_model_dir = application.config.get("COLD_MODEL_DIR") or model_dir
-    if "MAGNET_COLD_START_MODEL_DIR" in os.environ:
-        cold_model_dir = None
-    elif "MAGNET_MODEL_DIR" in os.environ and application.config.get("COLD_MODEL_DIR") is None:
-        cold_model_dir = os.environ["MAGNET_MODEL_DIR"]
+    cold_model_dir = application.config.get("COLD_MODEL_DIR") or application.config.get(
+        "MODEL_DIR"
+    )
+    if cold_model_dir is None and "MAGNET_COLD_START_MODEL_DIR" not in os.environ:
+        cold_model_dir = weights_root
     cold_manager = ModelManager(
         model_dir=cold_model_dir,
         device=application.config.get("MODEL_DEVICE"),
