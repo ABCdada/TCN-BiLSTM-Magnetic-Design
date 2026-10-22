@@ -13,6 +13,8 @@ based on Keep a Changelog, and versions follow Semantic Versioning where possibl
   both checkpoint manifests under the packaged shared-data directory. Source
   checkouts and explicit model-directory environment variables retain their
   existing precedence.
+- Release text files and generated checksum manifests use canonical LF line
+  endings so published hashes remain stable across Windows and Linux.
 
 ## [1.3.1] - 2026-10-22
 

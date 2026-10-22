@@ -89,7 +89,8 @@ def main() -> None:
         if path.resolve() == output.resolve():
             continue
         records.append(f"{digest(path)}  {path.relative_to(root).as_posix()}")
-    output.write_text("\n".join(records) + "\n", encoding="utf-8")
+    with output.open("w", encoding="utf-8", newline="\n") as stream:
+        stream.write("\n".join(records) + "\n")
     print(f"wrote {len(records)} checksums to {output}")
 
 

@@ -12,7 +12,9 @@ diagram and documentation no longer imply fixed geometry ratios.
 
 Version 1.3.2 also fixes installed-wheel resource discovery so the application
 can find its packaged templates, static assets, result files, licenses, and
-checkpoint manifests when imported outside a source checkout.
+checkpoint manifests when imported outside a source checkout. Text files and
+generated checksum manifests now use canonical LF endings for stable hashes on
+Windows and Linux.
 
 ## Included
 

@@ -1,12 +1,10 @@
-* text=auto
-*.py text eol=lf
-*.sh text eol=lf
-*.bat text eol=crlf
-*.json text eol=lf
-*.md text eol=lf
-*.csv text eol=lf
+* text=auto eol=lf
 *.pth binary
 *.pt binary
+*.ckpt binary
+*.bin binary
+*.onnx binary
+*.safetensors binary
 *.zip binary
 *.png binary
 *.jpg binary
