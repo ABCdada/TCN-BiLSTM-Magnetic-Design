@@ -1,0 +1,41 @@
+{
+  "format_version": 1,
+  "algorithm": "sha256",
+  "models": {
+    "A": {
+      "material": "3C92",
+      "parameter_count": 497793,
+      "path": "A_best_model.pth",
+      "bytes": 0,
+      "sha256": "replace-with-64-lowercase-hexadecimal-characters"
+    },
+    "B": {
+      "material": "3C95",
+      "parameter_count": 2092545,
+      "path": "B_best_model.pth",
+      "bytes": 0,
+      "sha256": "replace-with-64-lowercase-hexadecimal-characters"
+    },
+    "C": {
+      "material": "FEC007",
+      "parameter_count": 2092545,
+      "path": "C_best_model.pth",
+      "bytes": 0,
+      "sha256": "replace-with-64-lowercase-hexadecimal-characters"
+    },
+    "D": {
+      "material": "FEC014",
+      "parameter_count": 2512593,
+      "path": "D_best_model.pth",
+      "bytes": 0,
+      "sha256": "replace-with-64-lowercase-hexadecimal-characters"
+    },
+    "E": {
+      "material": "T37",
+      "parameter_count": 2092865,
+      "path": "E_best_model.pth",
+      "bytes": 0,
+      "sha256": "replace-with-64-lowercase-hexadecimal-characters"
+    }
+  }
+}

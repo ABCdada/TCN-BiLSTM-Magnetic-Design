@@ -1,0 +1,112 @@
+name: Bug report
+description: Report a reproducible problem in the inference, API, CLI, or circuit examples.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a problem. Do not upload proprietary waveforms,
+        training data, credentials, or checkpoint files unless redistribution is
+        explicitly permitted.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - Python inference API
+        - REST API or Web interface
+        - Command-line interface
+        - Circuit or converter example
+        - Packaging or installation
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Project version or commit
+      placeholder: "1.1.0 or a full commit hash"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include OS, Python, PyTorch, CPU/GPU, and CUDA versions as applicable.
+      placeholder: |
+        OS: Ubuntu 24.04
+        Python: 3.11.9
+        PyTorch: 2.x
+        Device: CPU or GPU model / CUDA version
+    validations:
+      required: true
+
+  - type: dropdown
+    id: material
+    attributes:
+      label: Material model
+      options:
+        - Not model-specific
+        - A (3C92)
+        - B (3C95)
+        - C (FEC007)
+        - D (FEC014)
+        - E (T37)
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Minimal reproduction
+      description: Provide the smallest safe example and exact command or request.
+      placeholder: |
+        1. Install ...
+        2. Run ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Remove credentials, hostnames, private paths, and proprietary data before pasting.
+      render: shell
+
+  - type: input
+    id: manifest_hash
+    attributes:
+      label: Checkpoint manifest or SHA-256 information
+      description: Optional. Report identifiers only; do not attach the checkpoint itself.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I searched existing issues for the same problem.
+          required: true
+        - label: I removed secrets and data that I am not permitted to redistribute.
+          required: true
+

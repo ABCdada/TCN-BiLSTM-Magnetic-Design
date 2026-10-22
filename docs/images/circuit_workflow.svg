@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Circuit-to-magnetic window inference workflow</title>
+  <desc id="desc">A circuit solver supplies an induced-voltage window, geometry, temperature, and known history. Flux density is reconstructed, a model window is assembled, the TCN-BiLSTM predicts H, and magnetic current and energy quantities are reported.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="3.5" orient="auto"><path d="M0,0 L0,7 L10,3.5 z" fill="#315b7d"/></marker>
+    <style>
+      .title{font:700 28px Arial,sans-serif;fill:#17324d}.subtitle{font:15px Arial,sans-serif;fill:#4e6576}.head{font:700 17px Arial,sans-serif;fill:#17324d}.body{font:14px Arial,sans-serif;fill:#27455e}.small{font:13px Arial,sans-serif;fill:#4e6576}.box{stroke:#315b7d;stroke-width:2;rx:13}.arrow{stroke:#315b7d;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="700" fill="#f7fafc"/>
+  <text x="600" y="45" text-anchor="middle" class="title">Circuit-Level Window Inference Workflow</text>
+  <text x="600" y="72" text-anchor="middle" class="subtitle">Reproducible block interface; not one-timestep neural feedback</text>
+
+  <rect x="55" y="120" width="260" height="145" fill="#e7f2fb" class="box"/>
+  <text x="185" y="155" text-anchor="middle" class="head">Circuit or measurement source</text>
+  <text x="77" y="188" class="body">• induced core voltage</text>
+  <text x="77" y="214" class="body">• turns and core geometry</text>
+  <text x="77" y="240" class="body">• temperature and known history</text>
+
+  <path d="M315 193 H376" class="arrow"/>
+  <rect x="378" y="120" width="250" height="145" fill="#fff7e6" class="box"/>
+  <text x="503" y="155" text-anchor="middle" class="head">Electrical preprocessing</text>
+  <text x="503" y="190" text-anchor="middle" class="body">correct terminal-voltage drops</text>
+  <text x="503" y="217" text-anchor="middle" class="body">integrate induced voltage → B</text>
+  <text x="503" y="243" text-anchor="middle" class="small">1,000 samples at 16 MHz</text>
+
+  <path d="M628 193 H689" class="arrow"/>
+  <rect x="691" y="120" width="220" height="145" fill="#eaf7ef" class="box"/>
+  <text x="801" y="155" text-anchor="middle" class="head">Assemble model window</text>
+  <text x="801" y="190" text-anchor="middle" class="body">B, dB, T, known H, mask</text>
+  <text x="801" y="217" text-anchor="middle" class="small">E additionally uses ddB</text>
+  <text x="801" y="243" text-anchor="middle" class="small">select prediction boundary</text>
+
+  <path d="M911 193 H972" class="arrow"/>
+  <rect x="974" y="120" width="171" height="145" fill="#f1ecfb" class="box"/>
+  <text x="1059" y="155" text-anchor="middle" class="head">TCN-BiLSTM</text>
+  <text x="1059" y="190" text-anchor="middle" class="body">one window pass</text>
+  <text x="1059" y="217" text-anchor="middle" class="small">predict masked H</text>
+  <text x="1059" y="243" text-anchor="middle" class="small">strict checkpoint load</text>
+
+  <path d="M1059 265 V340 H885" class="arrow"/>
+  <rect x="594" y="303" width="289" height="126" fill="#fdecef" class="box"/>
+  <text x="739" y="338" text-anchor="middle" class="head">Merge and convert</text>
+  <text x="739" y="371" text-anchor="middle" class="body">known H + predicted H</text>
+  <text x="739" y="398" text-anchor="middle" class="body">H and geometry → magnetic current</text>
+
+  <path d="M594 366 H519" class="arrow"/>
+  <rect x="214" y="303" width="303" height="126" fill="#ffffff" class="box"/>
+  <text x="365" y="338" text-anchor="middle" class="head">Report with explicit semantics</text>
+  <text x="365" y="371" text-anchor="middle" class="body">B-H trajectory and target H</text>
+  <text x="365" y="398" text-anchor="middle" class="body">open exchange or closed-path energy</text>
+
+  <path d="M365 429 V501" class="arrow"/>
+  <polygon points="365,503 493,565 365,627 237,565" fill="#e7f2fb" stroke="#315b7d" stroke-width="2"/>
+  <text x="365" y="557" text-anchor="middle" class="head">More windows?</text>
+  <text x="365" y="581" text-anchor="middle" class="small">external stitching policy</text>
+
+  <path d="M493 565 H1057 V267" class="arrow"/>
+  <text x="778" y="551" text-anchor="middle" class="body">Yes: advance by configured hop</text>
+  <path d="M365 627 V662" class="arrow"/>
+  <text x="425" y="657" class="body">No: finish</text>
+
+  <rect x="687" y="475" width="458" height="122" rx="13" fill="#fff7e6" stroke="#c3872f" stroke-width="1.5"/>
+  <text x="916" y="508" text-anchor="middle" class="head">Deployment boundary</text>
+  <text x="711" y="538" class="small">A tightly coupled simulator must provide its own block iteration,</text>
+  <text x="711" y="562" class="small">state update, convergence rule, and nonuniform-field treatment.</text>
+  <text x="711" y="586" class="small">Synthetic converter traces are demonstrations, not measured validation.</text>
+</svg>
+

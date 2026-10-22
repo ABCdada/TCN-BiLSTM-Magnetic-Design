@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Documentation - Magnetic Circuit Lab{% endblock %}
+{% block page_id %}docs{% endblock %}
+{% block content %}
+<section class="page-hero shell docs-hero">
+  <div><p class="eyebrow">Implementation reference</p><h1>Documentation</h1></div>
+  <p>Model contracts, units, evaluation modes, and integration boundaries for reproducible use.</p>
+</section>
+
+<div class="docs-layout shell">
+  <aside class="docs-nav" aria-label="Documentation sections">
+    <strong>On this page</strong>
+    <a href="#quickstart">Quick start</a><a href="#data-contract">Data contract</a><a href="#modes">Prediction modes</a><a href="#api">HTTP API</a><a href="#circuit-integration">Circuit integration</a><a href="#energy">Energy interpretation</a><a href="#limitations">Limitations</a>
+  </aside>
+  <article class="docs-content">
+    <section id="quickstart"><p class="eyebrow">01</p><h2>Quick start</h2><p>Select one of the A-E material checkpoints, prepare a synchronized 1,000-sample window, specify temperature and the known-H interval, and send the request to the window-prediction endpoint. The model returns a full H sequence whose masked target interval is produced in one forward pass.</p><div class="callout"><strong>Reference grid</strong><span>At 16 MHz, a 1,000-sample window spans 62.5 &micro;s. Keep physical units and sampling order consistent with training.</span></div></section>
+
+    <section id="data-contract"><p class="eyebrow">02</p><h2>Input data and units</h2><div class="table-scroll"><table><thead><tr><th>Field</th><th>Unit / type</th><th>Requirement</th></tr></thead><tbody><tr><td><code>B</code></td><td>tesla, float[1000]</td><td>Complete synchronized flux-density sequence.</td></tr><tr><td><code>temperature</code></td><td>&deg;C, scalar or float[1000]</td><td>Scalar is broadcast across the window; released-data coverage is 25–70 &deg;C.</td></tr><tr><td><code>known_H</code></td><td>A/m, prefix or nullable float[1000]</td><td>Measured history; unknown target may be omitted or null. Material C instead requires its trained one-point zero placeholder.</td></tr><tr><td><code>mode</code></td><td>string</td><td><code>100-900</code>, <code>500-500</code>, <code>900-100</code>, or <code>1-999</code>.</td></tr><tr><td><code>sampling_rate_hz</code></td><td>Hz</td><td>16,000,000 for the released checkpoints.</td></tr></tbody></table></div><p><code>dB</code> and the binary mask are formed inside the inference pipeline. Material E additionally derives and normalizes <code>ddB</code>, the second discrete flux increment. The mask separates the measured H history from the interval to be reconstructed.</p></section>
+
+    <section id="modes"><p class="eyebrow">03</p><h2>History-to-prediction modes</h2><div class="mode-list"><article><strong>100 / 900</strong><p>Long reconstruction interval with limited magnetic history. This is the most demanding standard condition.</p></article><article><strong>500 / 500</strong><p>Balanced history and target intervals for medium-horizon transient reconstruction.</p></article><article><strong>900 / 100</strong><p>Short continuation when the preceding magnetic trajectory is well established.</p></article><article><strong>1 / 999</strong><p>Cold-start condition intended for data without an effective historical H trajectory.</p></article></div></section>
+
+    <section id="api"><p class="eyebrow">04</p><h2>HTTP API</h2>
+      <h3>List checkpoints</h3><pre><code>GET /api/models</code></pre>
+      <h3>Predict one window</h3><pre><code>POST /api/predict-window
+Content-Type: application/json
+
+{
+  "material": "A",
+  "B": [0.0012, 0.0018, "... 1000 values"],
+  "temperature": 25,
+  "known_H": [0.0, 1.2, "... known prefix"],
+  "mode": "100-900",
+  "sampling_rate_hz": 16000000
+}</code></pre><p>The response contains the full reconstructed <code>H</code> sequence, known and predicted portions, model metadata, and energy-related quantities when their calculation is applicable.</p>
+      <h3>Predict a longer sequence</h3><pre><code>POST /api/predict-sequence</code></pre><p>This endpoint applies overlapping windows to an N-point sequence. Window-to-window use is distinct from one-pass inference inside each window; inspect boundary behavior when using long trajectories.</p>
+      <h3>Run the circuit example</h3><pre><code>POST /api/circuit-demo
+{
+  "material": "A",
+  "induced_voltage": ["... sampled magnetic-core induced voltage"],
+  "current": ["... measured or solver-provided history prefix"],
+  "temperature": 25,
+  "turns": 20,
+  "area_m2": 0.000025,
+  "path_length_m": 0.06,
+  "sampling_rate_hz": 16000000,
+  "initial_B": 0,
+  "mode": "100-900"
+}</code></pre>
+      <h3>Run the converter-state example</h3><pre><code>POST /api/converter-demo
+{
+  "material": "A",
+  "topology": "single_phase_full_bridge",
+  "mode": "100-900",
+  "dc_voltage": 50,
+  "grid_voltage_rms": 20,
+  "grid_frequency_hz": 50,
+  "switching_frequency_hz": 100000,
+  "filter_inductance_h": 0.000145,
+  "series_resistance_ohm": 0.05,
+  "temperature": 25,
+  "turns": 20,
+  "area_m2": 0.000025,
+  "path_length_m": 0.06,
+  "sampling_rate_hz": 16000000
+}</code></pre><p>This deterministic SPWM and R-L state example supports single-phase full-bridge, three-phase full-bridge, and three-phase T-type windows. The resulting induced-voltage window is processed by the neural model after the electrical state calculation; model output is not fed back at every time step.</p>
+    </section>
+
+    <section id="circuit-integration"><p class="eyebrow">05</p><h2>Circuit-solver integration</h2><ol class="doc-steps"><li><span>1</span><div><strong>Initialize the operating point</strong><p>Set excitation, material, temperature, time step, turns, effective area, and magnetic path length.</p></div></li><li><span>2</span><div><strong>Reconstruct the flux-density window</strong><p>Integrate the magnetic-core induced voltage after removing winding-resistance, leakage-inductance, and relevant parasitic drops; then form B and dB on the 16 MHz sample grid.</p></div></li><li><span>3</span><div><strong>Infer the masked H interval</strong><p>Pass B, its material-specific derived increments, temperature, the measured or solver-provided H history, and its mask through the model in one forward call.</p></div></li><li><span>4</span><div><strong>Return the magnetic block state</strong><p>Merge the known history and prediction, then convert H to magnetic-branch current. Use it to post-process a voltage-defined window or inside an external block/outer-iteration scheme; the bidirectional model is not a causal one-timestep feedback element.</p></div></li></ol><div class="callout"><strong>Validation data</strong><span>The circuit API accepts an optional full <code>reference_current</code> array for accuracy metrics. A current history prefix is sufficient for inference but is not a validation reference. Supply <code>reference_loss_density</code> to reproduce the paper/challenge energy-error denominator.</span></div><div class="callout"><strong>Geometry scope</strong><span>The direct Ae/le conversion assumes a near-uniform toroidal or equivalent magnetic path. Gapped, hybrid-material, strongly nonuniform, or leakage-dominated structures require a segmented magnetic circuit or field solver to provide local B and H.</span></div></section>
+
+    <section id="energy"><p class="eyebrow">06</p><h2>Energy interpretation</h2><p>The discrete trajectory integral based on H and B can represent different quantities depending on the interval. Over a closed path it gives the cumulative enclosed energy; this equals dissipated energy density per cycle only when the record contains exactly one magnetic period. Over a non-closed transient interval it also includes reversible energy exchange and the change in stored magnetic energy. Do not label every partial-window integral as irreversible core loss.</p></section>
+
+    <section id="limitations"><p class="eyebrow">07</p><h2>Limitations and responsible use</h2><ul class="check-list"><li>The released checkpoints are material-specific and should not be treated as universal constitutive laws.</li><li>The 16 MHz interval is part of the learned representation. Resampled data require explicit dB/dt handling and retraining or fine-tuning.</li><li>Temperature should remain within the coverage of the material's training data.</li><li>Predictions outside the measured excitation, B, DC-bias, or saturation range are extrapolations.</li><li>The demonstration supports circuit integration but does not replace independent experimental validation or calorimetric loss measurement.</li><li>Check normalization metadata and checkpoint compatibility before comparing models.</li></ul></section>
+  </article>
+</div>
+{% endblock %}

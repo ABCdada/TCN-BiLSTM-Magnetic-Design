@@ -1,0 +1,202 @@
+/*
+ * Aurora theme for the TCN-BiLSTM web interface.
+ * It intentionally changes only visual tokens; page layout and behavior stay intact.
+ */
+:root {
+    --aurora-ink: #17233a;
+    --aurora-muted: #627089;
+    --aurora-canvas: #f4f7fb;
+    --aurora-panel: #ffffff;
+    --aurora-soft: #eaf1f6;
+    --aurora-line: #d5e0e9;
+    --aurora-teal: #0f766e;
+    --aurora-teal-bright: #14b8a6;
+    --aurora-indigo: #4f46e5;
+    --aurora-navy: #172a46;
+}
+
+html {
+    color-scheme: light;
+}
+
+body {
+    color: var(--aurora-ink);
+    background:
+        radial-gradient(circle at 8% 0%, rgba(20, 184, 166, 0.08), transparent 30rem),
+        radial-gradient(circle at 96% 8%, rgba(79, 70, 229, 0.06), transparent 34rem),
+        var(--aurora-canvas) !important;
+}
+
+.bg-gray-50 {
+    background-color: transparent !important;
+}
+
+.bg-gray-100 {
+    background-color: var(--aurora-soft) !important;
+}
+
+.border-gray-200,
+.border-gray-300 {
+    border-color: var(--aurora-line) !important;
+}
+
+.text-gray-800,
+.text-gray-900 {
+    color: var(--aurora-ink) !important;
+}
+
+.text-gray-500,
+.text-gray-600,
+.text-gray-700 {
+    color: var(--aurora-muted) !important;
+}
+
+.bg-white.shadow-sm,
+.shadow-sm.bg-white,
+section > .bg-white,
+.doc-section {
+    border-color: var(--aurora-line) !important;
+    box-shadow: 0 10px 28px rgba(23, 42, 70, 0.07) !important;
+}
+
+.bg-gray-900 {
+    background: linear-gradient(135deg, var(--aurora-navy), var(--aurora-teal)) !important;
+}
+
+.hover\:bg-gray-800:hover {
+    background: linear-gradient(135deg, #223b61, #0d9488) !important;
+}
+
+input,
+select,
+button,
+textarea {
+    transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease,
+        transform 160ms ease;
+}
+
+input:not(:disabled):focus,
+select:not(:disabled):focus,
+textarea:not(:disabled):focus {
+    border-color: var(--aurora-teal-bright) !important;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15) !important;
+    outline: none !important;
+}
+
+select:not(:disabled) {
+    border-color: rgba(15, 118, 110, 0.48) !important;
+    cursor: pointer;
+}
+
+button:not(:disabled):active {
+    transform: translateY(1px);
+}
+
+input[type="range"] {
+    accent-color: var(--aurora-teal) !important;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: #edf2f7;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #9aabba;
+    border: 2px solid #edf2f7;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #708498;
+}
+
+/* Shell-only styling. The layout widths and iframe behavior remain unchanged. */
+#sidebar {
+    background: linear-gradient(170deg, #172a46 0%, #18364b 54%, #0f5955 130%) !important;
+    border-color: rgba(255, 255, 255, 0.09) !important;
+    box-shadow: 12px 0 36px rgba(23, 42, 70, 0.14);
+}
+
+#sidebar > div:first-child {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+#sidebar-banner > div:first-child {
+    background: linear-gradient(135deg, #14b8a6, #6366f1) !important;
+    box-shadow: 0 8px 20px rgba(20, 184, 166, 0.24) !important;
+}
+
+#sidebar-banner h1,
+#sidebar .team-text,
+#sidebar .team-text .font-semibold {
+    color: #f8fbff !important;
+}
+
+#sidebar-banner p,
+#sidebar .team-text,
+#sidebar .team-text svg {
+    color: #b9cbd9 !important;
+}
+
+#sidebar .menu-item {
+    color: #c6d5e2 !important;
+    border: 1px solid transparent;
+}
+
+#sidebar .menu-item:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+#sidebar .menu-item.active {
+    color: #ffffff !important;
+    background: linear-gradient(105deg, rgba(20, 184, 166, 0.86), rgba(79, 70, 229, 0.76)) !important;
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 22px rgba(7, 21, 37, 0.2);
+}
+
+#sidebar .menu-item.active svg,
+#sidebar .menu-item:hover svg {
+    color: #ffffff !important;
+}
+
+#toggle-sidebar {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#toggle-sidebar:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+#toggle-sidebar svg {
+    color: #d9e8f1 !important;
+}
+
+#team-info {
+    background: rgba(7, 26, 42, 0.34) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+#team-info a {
+    color: #6ee7d7 !important;
+}
+
+#main-content,
+#main-content main {
+    background: var(--aurora-canvas) !important;
+}
+
+#loader-overlay {
+    background: rgba(244, 247, 251, 0.88) !important;
+}
+
+.spinner {
+    border-color: #dce6ed !important;
+    border-top-color: var(--aurora-teal) !important;
+}

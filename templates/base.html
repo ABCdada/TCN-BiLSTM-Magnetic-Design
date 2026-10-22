@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Open inference and circuit-integration demo for TCN-BiLSTM transient magnetic modeling.">
+  <title>{% block title %}Magnetic Circuit Lab{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body data-page="{% block page_id %}home{% endblock %}">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="Magnetic Circuit Lab home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" role="img"><path d="M8 13h8v14H8zM24 13h8v14h-8zM16 17h8v6h-8z"/><path class="brand-wave" d="M4 31c5-8 9 8 14 0s9 8 18 0"/></svg>
+        </span>
+        <span><strong>Magnetic Circuit Lab</strong><small>TCN-BiLSTM inference</small></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/" data-nav="home">Overview</a>
+        <a href="/predict" data-nav="predict">Prediction</a>
+        <a href="/circuit" data-nav="circuit">Circuit demo</a>
+        <a href="/docs" data-nav="docs">Documentation</a>
+        <a href="/resources" data-nav="resources">Resources</a>
+        <a class="nav-github" href="/docs#api">API reference <span aria-hidden="true">&rarr;</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>TCN-BiLSTM transient magnetic model</strong>
+      <p>Reproducible window inference and a documented circuit-solver interface for ferrite cores.</p>
+    </div>
+    <div class="footer-links">
+      <a href="/docs#api">API reference</a>
+      <a href="/docs#limitations">Limitations</a>
+      <a href="/resources">Result files</a>
+    </div>
+  </footer>
+
+  <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <script src="{{ url_for('static', filename='js/common.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

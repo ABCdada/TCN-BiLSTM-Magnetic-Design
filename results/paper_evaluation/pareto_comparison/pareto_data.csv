@@ -1,0 +1,6 @@
+Model,Mean_parameters,Mean_sequence_P95_percent,Mean_energy_P95_percent
+Physics-mechanical [13],83.4,27.904,8.516
+LSTM-DAO [14],6564,9.1974,1.7427
+MagLearn 2 [15],860929,8.578,NA
+GRU-Tiny [16],325,20.532,3.362
+TCN-BiLSTM (this work),1857604.2,7.836,1.394

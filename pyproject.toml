@@ -1,0 +1,96 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tcn-bilstm-magnetic-circuit"
+version = "1.3.1"
+description = "Reproducible TCN-BiLSTM inference for transient magnetic circuits"
+requires-python = ">=3.10"
+dependencies = [
+  "Flask>=3.0,<4",
+  "numpy>=1.24,<3",
+  "torch>=2.1",
+  "waitress>=3.0,<4",
+  "requests>=2.31,<3",
+  "pytest>=8,<9",
+]
+
+[project.urls]
+Homepage = "https://github.com/ABCdada/TCN-BiLSTM-Magnetic-Design"
+Repository = "https://github.com/ABCdada/TCN-BiLSTM-Magnetic-Design.git"
+Issues = "https://github.com/ABCdada/TCN-BiLSTM-Magnetic-Design/issues"
+
+[project.scripts]
+magnetic-infer = "cli:main"
+
+[tool.setuptools]
+py-modules = ["app", "cli"]
+
+[tool.setuptools.packages.find]
+include = ["magnetic_model*"]
+
+[tool.setuptools.data-files]
+"share/tcn_bilstm_magnetic_circuit" = [
+  "README.md",
+  "README_zh-CN.md",
+  "LICENSE",
+  "THIRD_PARTY_NOTICES.md",
+  "MODEL_CARD.md",
+  "DATA_CARD.md",
+  "REPRODUCIBILITY.md",
+  "TRAINING.md",
+  "CHANGELOG.md",
+  "CITATION.cff",
+  "API.md",
+  "DEPLOYMENT.md",
+  "TESTING.md",
+  "RELEASE_NOTES.md",
+  "GITHUB_UPLOAD_CHECKLIST.md",
+  "MODEL_WEIGHTS_NOTICE.md",
+  "requirements-validated.txt",
+]
+"share/tcn_bilstm_magnetic_circuit/templates" = ["templates/*.html"]
+"share/tcn_bilstm_magnetic_circuit/static/css" = ["static/css/*.css"]
+"share/tcn_bilstm_magnetic_circuit/static/js" = ["static/js/*.js"]
+"share/tcn_bilstm_magnetic_circuit/static/vendor" = ["static/vendor/*"]
+"share/tcn_bilstm_magnetic_circuit/static/images" = ["static/images/*"]
+"share/tcn_bilstm_magnetic_circuit/static/resources" = ["static/resources/*"]
+"share/tcn_bilstm_magnetic_circuit/licenses" = ["licenses/*"]
+"share/tcn_bilstm_magnetic_circuit/docs" = ["docs/*.md"]
+"share/tcn_bilstm_magnetic_circuit/docs/images" = ["docs/images/*"]
+"share/tcn_bilstm_magnetic_circuit/examples/data" = ["examples/data/*"]
+"share/tcn_bilstm_magnetic_circuit/results" = ["results/*.md", "results/*.csv"]
+"share/tcn_bilstm_magnetic_circuit/results/paper_evaluation" = [
+  "results/paper_evaluation/*.csv",
+  "results/paper_evaluation/*.json",
+  "results/paper_evaluation/*.md",
+]
+"share/tcn_bilstm_magnetic_circuit/results/paper_evaluation/pareto_comparison" = [
+  "results/paper_evaluation/pareto_comparison/*.csv",
+  "results/paper_evaluation/pareto_comparison/*.svg",
+  "results/paper_evaluation/pareto_comparison/*.md",
+]
+"share/tcn_bilstm_magnetic_circuit/results/reproducible_examples" = [
+  "results/reproducible_examples/*.json",
+  "results/reproducible_examples/*.md",
+]
+"share/tcn_bilstm_magnetic_circuit/results/verification" = [
+  "results/verification/*.json",
+  "results/verification/*.md",
+  "results/verification/*.txt",
+]
+"share/tcn_bilstm_magnetic_circuit/results/cold_start_smoke" = [
+  "results/cold_start_smoke/*.csv",
+  "results/cold_start_smoke/*.json",
+  "results/cold_start_smoke/*.md",
+]
+"share/tcn_bilstm_magnetic_circuit/results/cold_start_training" = [
+  "results/cold_start_training/*.json",
+  "results/cold_start_training/*.md",
+]
+"share/tcn_bilstm_magnetic_circuit/weights" = [
+  "weights/manifest.json",
+  "weights/cold_start_manifest.json",
+  "weights/README.md",
+]

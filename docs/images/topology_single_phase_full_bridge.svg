@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+  <title id="title">Conceptual single-phase full-bridge converter topology</title>
+  <desc id="desc">A DC link supplies four switches in an H bridge. The bridge output connects through a magnetic filter inductor to a single-phase grid.</desc>
+  <defs><style>.t{font:700 27px Arial,sans-serif;fill:#17324d}.h{font:700 17px Arial,sans-serif;fill:#17324d}.b{font:14px Arial,sans-serif;fill:#36546b}.wire{stroke:#294f6d;stroke-width:4;fill:none}.sw{fill:#e7f2fb;stroke:#315b7d;stroke-width:2}.core{fill:#fdecef;stroke:#9e4b5f;stroke-width:3}</style></defs>
+  <rect width="1000" height="600" fill="#f7fafc"/>
+  <text x="500" y="48" text-anchor="middle" class="t">Single-Phase Full Bridge</text>
+  <text x="500" y="76" text-anchor="middle" class="b">Conceptual SPWM + series R-L example</text>
+
+  <line x1="150" y1="145" x2="650" y2="145" class="wire"/><line x1="150" y1="435" x2="650" y2="435" class="wire"/>
+  <circle cx="105" cy="290" r="52" fill="#fff7e6" stroke="#b47722" stroke-width="3"/>
+  <text x="105" y="283" text-anchor="middle" class="h">DC</text><text x="105" y="307" text-anchor="middle" class="b">link</text>
+  <line x1="105" y1="238" x2="105" y2="145" class="wire"/><line x1="105" y1="342" x2="105" y2="435" class="wire"/>
+  <text x="124" y="134" class="h">+</text><text x="124" y="463" class="h">−</text>
+
+  <rect x="240" y="185" width="70" height="78" rx="8" class="sw"/><rect x="240" y="317" width="70" height="78" rx="8" class="sw"/>
+  <rect x="490" y="185" width="70" height="78" rx="8" class="sw"/><rect x="490" y="317" width="70" height="78" rx="8" class="sw"/>
+  <text x="275" y="231" text-anchor="middle" class="h">S1</text><text x="275" y="363" text-anchor="middle" class="h">S2</text>
+  <text x="525" y="231" text-anchor="middle" class="h">S3</text><text x="525" y="363" text-anchor="middle" class="h">S4</text>
+  <line x1="275" y1="145" x2="275" y2="185" class="wire"/><line x1="275" y1="263" x2="275" y2="317" class="wire"/><line x1="275" y1="395" x2="275" y2="435" class="wire"/>
+  <line x1="525" y1="145" x2="525" y2="185" class="wire"/><line x1="525" y1="263" x2="525" y2="317" class="wire"/><line x1="525" y1="395" x2="525" y2="435" class="wire"/>
+
+  <line x1="275" y1="290" x2="640" y2="290" class="wire"/>
+  <path d="M640 290 c12 -30 28 -30 40 0 c12 30 28 30 40 0 c12 -30 28 -30 40 0 c12 30 28 30 40 0" class="wire"/>
+  <ellipse cx="720" cy="290" rx="72" ry="54" class="core" fill-opacity="0.35"/>
+  <line x1="800" y1="290" x2="875" y2="290" class="wire"/>
+  <circle cx="895" cy="290" r="58" fill="#eaf7ef" stroke="#45805f" stroke-width="3"/>
+  <path d="M855 290 q20 -42 40 0 t40 0" stroke="#45805f" stroke-width="3" fill="none"/>
+  <text x="720" y="382" text-anchor="middle" class="h">Magnetic filter L</text><text x="895" y="382" text-anchor="middle" class="h">AC grid</text>
+  <line x1="895" y1="348" x2="895" y2="435" class="wire"/><line x1="895" y1="435" x2="525" y2="435" class="wire"/>
+  <text x="500" y="536" text-anchor="middle" class="b">Documentation schematic only; semiconductor losses and control dynamics are outside the example.</text>
+</svg>
+

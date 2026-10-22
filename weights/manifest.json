@@ -1,0 +1,41 @@
+{
+  "format_version": 1,
+  "algorithm": "sha256",
+  "models": {
+    "A": {
+      "material": "3C92",
+      "parameter_count": 497793,
+      "path": "A_best_model.pth",
+      "bytes": 2006453,
+      "sha256": "94a3c148fb17b20014cfb35e19162a08d7b8ea92cd5770cb0ff33e769e398ac0"
+    },
+    "B": {
+      "material": "3C95",
+      "parameter_count": 2092545,
+      "path": "B_best_model.pth",
+      "bytes": 8391285,
+      "sha256": "866674253d241c2127434fd57f3acfe981f54e559ffcfdfb535363f7b6810b17"
+    },
+    "C": {
+      "material": "FEC007",
+      "parameter_count": 2092545,
+      "path": "C_best_model.pth",
+      "bytes": 8391285,
+      "sha256": "846a171e00a0b31b82932a0e1e7b01f4db413137b7cbcd82313afa1030be60d8"
+    },
+    "D": {
+      "material": "FEC014",
+      "parameter_count": 2512593,
+      "path": "D_best_model.pth",
+      "bytes": 10071477,
+      "sha256": "1ecb22936ca4c06d670f54d6cb425a2aaf5bcd39c16e99a5b616c6145e2e6f1b"
+    },
+    "E": {
+      "material": "T37",
+      "parameter_count": 2092865,
+      "path": "E_best_model.pth",
+      "bytes": 8391541,
+      "sha256": "85e43dea4d08a5b4909a5c2796b66fd2a5c404cabb6facb20779d69d0ef21d88"
+    }
+  }
+}

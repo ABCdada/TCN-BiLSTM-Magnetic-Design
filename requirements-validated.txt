@@ -1,0 +1,9 @@
+# Direct dependency versions used for the validated AutoDL deployment.
+# This is a reproducibility snapshot, not a universal CUDA lock file.
+# Install a PyTorch wheel compatible with your CPU/CUDA platform when needed.
+Flask==3.1.3
+numpy==2.3.2
+torch==2.8.0
+waitress==3.0.2
+requests==2.31.0
+pytest==8.4.2

@@ -1,0 +1,18 @@
+{
+  "artifact_class": "manuscript_reported_metrics",
+  "recomputed_from_raw_records": false,
+  "metric_unit": "percent",
+  "materials": [
+    {"id": "A", "grade": "3C92", "sequence_p95": 12.98, "energy_p95": 0.96},
+    {"id": "B", "grade": "3C95", "sequence_p95": 4.30, "energy_p95": 0.79},
+    {"id": "C", "grade": "FEC007", "sequence_p95": 11.09, "energy_p95": 3.49},
+    {"id": "D", "grade": "FEC014", "sequence_p95": 5.40, "energy_p95": 1.32},
+    {"id": "E", "grade": "T37", "sequence_p95": 5.41, "energy_p95": 0.41}
+  ],
+  "five_material_mean": {
+    "sequence_p95": 7.84,
+    "energy_p95": 1.39
+  },
+  "aggregation_note": "A, B, D, and E first average the three prediction scenarios; C uses its dedicated cold-start evaluation. The five material-level values are then averaged.",
+  "provenance": "Transcribed from the revised manuscript; the raw independent target records are not redistributed in this repository."
+}

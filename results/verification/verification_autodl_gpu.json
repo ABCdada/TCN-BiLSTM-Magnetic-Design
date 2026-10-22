@@ -1,0 +1,89 @@
+{
+  "report_version": 1,
+  "status": "ok",
+  "manifest": "weights/manifest.json",
+  "manifest_format_version": 1,
+  "device": "cuda",
+  "python": "3.12.3",
+  "platform": "Linux-5.4.0-155-generic-x86_64-with-glibc2.35",
+  "torch": "2.8.0+cu128",
+  "cuda_runtime": "12.8",
+  "cuda_device": "NVIDIA vGPU-32GB",
+  "models": {
+    "A": {
+      "material": "3C92",
+      "checkpoint": "A_best_model.pth",
+      "checkpoint_sha256": "94a3c148fb17b20014cfb35e19162a08d7b8ea92cd5770cb0ff33e769e398ac0",
+      "parameter_count": 497793,
+      "output_shape": [
+        1,
+        1000
+      ],
+      "output_min": -0.23696346580982208,
+      "output_max": 0.30959734320640564,
+      "output_mean": -0.015511884354054928,
+      "output_float32_sha256": "31b0b4b2ee044317db1a0286203b6f78ebbbade99bd754d5440bf91f79b8fa28",
+      "elapsed_seconds": 0.781668
+    },
+    "B": {
+      "material": "3C95",
+      "checkpoint": "B_best_model.pth",
+      "checkpoint_sha256": "866674253d241c2127434fd57f3acfe981f54e559ffcfdfb535363f7b6810b17",
+      "parameter_count": 2092545,
+      "output_shape": [
+        1,
+        1000
+      ],
+      "output_min": -0.29576680064201355,
+      "output_max": 0.20499911904335022,
+      "output_mean": -0.0607561357319355,
+      "output_float32_sha256": "5fbf203763bae32ebe5f0f23e9aebc4c5fb2479dd5f67b67ac27c6d3196458ca",
+      "elapsed_seconds": 0.760083
+    },
+    "C": {
+      "material": "FEC007",
+      "checkpoint": "C_best_model.pth",
+      "checkpoint_sha256": "846a171e00a0b31b82932a0e1e7b01f4db413137b7cbcd82313afa1030be60d8",
+      "parameter_count": 2092545,
+      "output_shape": [
+        1,
+        1000
+      ],
+      "output_min": 0.06382852792739868,
+      "output_max": 0.8964277505874634,
+      "output_mean": 0.19754718244075775,
+      "output_float32_sha256": "a590790a0b7c7c0155e1f7e34ec8cebdad2b68b31cf89addec1a1996a7846281",
+      "elapsed_seconds": 0.135231
+    },
+    "D": {
+      "material": "FEC014",
+      "checkpoint": "D_best_model.pth",
+      "checkpoint_sha256": "1ecb22936ca4c06d670f54d6cb425a2aaf5bcd39c16e99a5b616c6145e2e6f1b",
+      "parameter_count": 2512593,
+      "output_shape": [
+        1,
+        1000
+      ],
+      "output_min": -0.3847547471523285,
+      "output_max": 0.1934865117073059,
+      "output_mean": -0.0373697355389595,
+      "output_float32_sha256": "e4c1e9962e35ddc838c24d77008b2d2d15f4111613a7013e3f32d8db4e742c84",
+      "elapsed_seconds": 0.30256
+    },
+    "E": {
+      "material": "T37",
+      "checkpoint": "E_best_model.pth",
+      "checkpoint_sha256": "85e43dea4d08a5b4909a5c2796b66fd2a5c404cabb6facb20779d69d0ef21d88",
+      "parameter_count": 2092865,
+      "output_shape": [
+        1,
+        1000
+      ],
+      "output_min": -0.4195423424243927,
+      "output_max": 0.2771836817264557,
+      "output_mean": 0.005924302153289318,
+      "output_float32_sha256": "d97c40669c236967ad5421e77400dad1111bbd5582b5895125ee5399bf8f7bea",
+      "elapsed_seconds": 0.109654
+    }
+  }
+}

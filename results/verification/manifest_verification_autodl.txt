@@ -1,0 +1,1 @@
+verified checkpoint sizes and SHA-256 hashes for A-E

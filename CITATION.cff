@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite the accompanying manuscript and this
+  software release.
+title: TCN-BiLSTM Transient Magnetic Inference
+type: software
+authors:
+  - given-names: Chuanyang
+    family-names: Wang
+  - given-names: Shutong
+    family-names: Sang
+  - given-names: Sheng
+    family-names: Qu
+  - given-names: Yudong
+    family-names: Wang
+  - given-names: Yuqi
+    family-names: Wei
+version: 1.3.1
+date-released: 2026-10-22
+repository-code: https://github.com/ABCdada/TCN-BiLSTM-Magnetic-Design
+url: https://github.com/ABCdada/TCN-BiLSTM-Magnetic-Design
+license: MIT
+abstract: >-
+  A reproducible inference service for window-level transient magnetic-field
+  reconstruction using material-specific TCN-BiLSTM models, with web, API,
+  command-line, circuit-window, and deterministic converter examples.
+keywords:
+  - transient hysteresis
+  - magnetic materials
+  - TCN-BiLSTM
+  - circuit simulation
+  - machine learning
+preferred-citation:
+  type: article
+  title: A Transient Hysteresis Model Based on TCN-BiLSTM and Few-Shot Transfer Learning
+  authors:
+    - given-names: Chuanyang
+      family-names: Wang
+    - given-names: Shutong
+      family-names: Sang
+    - given-names: Sheng
+      family-names: Qu
+    - given-names: Yudong
+      family-names: Wang
+    - given-names: Yuqi
+      family-names: Wei

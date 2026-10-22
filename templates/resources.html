@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Resources - Magnetic Circuit Lab{% endblock %}
+{% block page_id %}resources{% endblock %}
+{% block content %}
+<section class="page-hero shell docs-hero">
+  <div><p class="eyebrow">Tracked release artifacts</p><h1>Resources and results</h1></div>
+  <p>Download machine-readable metrics, independent validation summaries, editable figures, and reproducible software examples.</p>
+</section>
+
+<section class="section shell">
+  <div class="callout">
+    <strong>Interpret results by provenance</strong>
+    <span>Manuscript tables are reported aggregate metrics; PFC data are independently measured validation; synthetic examples verify software execution only. The raw independent MagNetX targets are not redistributed here.</span>
+  </div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Artifact</th><th>Evidence class</th><th>File</th><th>Access</th></tr></thead>
+      <tbody>
+      {% for artifact in artifacts %}
+        <tr>
+          <td>{{ artifact.title }}</td>
+          <td>{{ artifact.kind }}</td>
+          <td><code>{{ artifact.filename }}</code></td>
+          <td>
+            {% if artifact.available %}
+              <a class="button button-secondary" href="{{ url_for('download_artifact', artifact_id=artifact.id) }}">Download</a>
+            {% else %}
+              <span class="availability">Not packaged</span>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section section-tint">
+  <div class="shell feature-grid">
+    <article class="feature-card"><span class="feature-index">01</span><h3>Scientific results</h3><p>See <code>results/paper_evaluation/</code> for A-E P95 values, training reports, error distributions, comparison data, MATLAB source, and editable SVG plots.</p></article>
+    <article class="feature-card"><span class="feature-index">02</span><h3>Independent experiment</h3><p>The PFC validation CSV records the three prediction scenarios described in the revised manuscript. Corresponding figures are under <code>docs/screenshots/</code>.</p></article>
+    <article class="feature-card"><span class="feature-index">03</span><h3>Software reproduction</h3><p>See <code>results/reproducible_examples/</code> for complete requests, responses, pointwise CSV files, SVG figures, summaries, and a SHA-256 provenance manifest.</p></article>
+  </div>
+</section>
+{% endblock %}

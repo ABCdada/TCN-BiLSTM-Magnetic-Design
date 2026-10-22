@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">TCN-BiLSTM transient magnetic inference architecture</title>
+  <desc id="desc">A 1000-sample input window passes through feature mapping, residual dilated temporal convolutions, a bidirectional LSTM, and fully connected regression to reconstruct the unknown H interval.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#315b7d"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#17324d" flood-opacity="0.16"/>
+    </filter>
+    <style>
+      .title{font:700 28px Arial,sans-serif;fill:#17324d}.subtitle{font:15px Arial,sans-serif;fill:#4e6576}.head{font:700 17px Arial,sans-serif;fill:#17324d}.body{font:14px Arial,sans-serif;fill:#27455e}.small{font:13px Arial,sans-serif;fill:#4e6576}.box{stroke:#315b7d;stroke-width:2;rx:14;filter:url(#shadow)}.arrow{stroke:#315b7d;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="560" fill="#f7fafc"/>
+  <text x="600" y="46" text-anchor="middle" class="title">TCN-BiLSTM Window-Level Reconstruction</text>
+  <text x="600" y="73" text-anchor="middle" class="subtitle">Fixed contract: 1,000 samples at 16 MHz (62.5 µs)</text>
+
+  <rect x="42" y="143" width="200" height="244" fill="#e7f2fb" class="box"/>
+  <text x="142" y="176" text-anchor="middle" class="head">Input window</text>
+  <text x="65" y="211" class="body">A-D: 5 channels</text>
+  <text x="65" y="238" class="small">B, dB, T</text>
+  <text x="65" y="261" class="small">known H, mask</text>
+  <line x1="65" y1="282" x2="219" y2="282" stroke="#9bb8cd"/>
+  <text x="65" y="311" class="body">E (T37): 6 channels</text>
+  <text x="65" y="338" class="small">adds ddB</text>
+  <text x="65" y="365" class="small">backend-derived features</text>
+
+  <path d="M242 265 H290" class="arrow"/>
+  <rect x="292" y="184" width="152" height="162" fill="#fff7e6" class="box"/>
+  <text x="368" y="220" text-anchor="middle" class="head">Feature map</text>
+  <text x="368" y="253" text-anchor="middle" class="body">1-D convolution</text>
+  <text x="368" y="281" text-anchor="middle" class="small">channel projection</text>
+  <text x="368" y="308" text-anchor="middle" class="small">pointwise features</text>
+
+  <path d="M444 265 H492" class="arrow"/>
+  <rect x="494" y="125" width="202" height="280" fill="#eaf7ef" class="box"/>
+  <text x="595" y="162" text-anchor="middle" class="head">Residual TCN</text>
+  <rect x="520" y="188" width="150" height="46" rx="8" fill="#ccebd9" stroke="#45805f"/>
+  <text x="595" y="217" text-anchor="middle" class="body">Dilated block 1</text>
+  <rect x="520" y="250" width="150" height="46" rx="8" fill="#ccebd9" stroke="#45805f"/>
+  <text x="595" y="279" text-anchor="middle" class="body">Dilated block 2</text>
+  <text x="595" y="326" text-anchor="middle" class="head">⋮</text>
+  <rect x="520" y="341" width="150" height="46" rx="8" fill="#ccebd9" stroke="#45805f"/>
+  <text x="595" y="370" text-anchor="middle" class="body">Multiscale block</text>
+
+  <path d="M696 265 H744" class="arrow"/>
+  <rect x="746" y="160" width="178" height="210" fill="#f1ecfb" class="box"/>
+  <text x="835" y="199" text-anchor="middle" class="head">Two-layer BiLSTM</text>
+  <path d="M780 239 H889" stroke="#7656a8" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M890 283 H781" stroke="#a7659d" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="835" y="324" text-anchor="middle" class="small">forward + backward</text>
+  <text x="835" y="348" text-anchor="middle" class="small">path context</text>
+
+  <path d="M924 265 H972" class="arrow"/>
+  <rect x="974" y="184" width="184" height="162" fill="#fdecef" class="box"/>
+  <text x="1066" y="221" text-anchor="middle" class="head">Regression head</text>
+  <text x="1066" y="253" text-anchor="middle" class="body">fully connected</text>
+  <text x="1066" y="281" text-anchor="middle" class="small">pointwise H estimate</text>
+  <text x="1066" y="310" text-anchor="middle" class="small">one forward pass</text>
+
+  <path d="M1066 346 V431" class="arrow"/>
+  <rect x="813" y="433" width="345" height="82" fill="#ffffff" class="box"/>
+  <text x="985" y="465" text-anchor="middle" class="head">Reconstructed H trajectory</text>
+  <text x="985" y="493" text-anchor="middle" class="small">merge known prefix with predicted target interval</text>
+
+  <rect x="42" y="433" width="678" height="82" rx="14" fill="#ffffff" stroke="#9bb8cd" stroke-width="1.5"/>
+  <text x="62" y="464" class="body">Supported history / prediction partitions:</text>
+  <text x="356" y="464" class="head">900-100</text>
+  <text x="469" y="464" class="head">500-500</text>
+  <text x="582" y="464" class="head">100-900</text>
+  <text x="62" y="493" class="small">Window-level non-autoregressive reconstruction; long sequences use explicit window stitching.</text>
+</svg>
+

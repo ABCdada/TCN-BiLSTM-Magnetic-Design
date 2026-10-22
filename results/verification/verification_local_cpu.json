@@ -1,0 +1,89 @@
+{
+  "report_version": 1,
+  "status": "ok",
+  "manifest": "weights/manifest.json",
+  "manifest_format_version": 1,
+  "device": "cpu",
+  "python": "3.13.1",
+  "platform": "Windows-11-10.0.22621-SP0",
+  "torch": "2.7.0+cpu",
+  "cuda_runtime": null,
+  "cuda_device": null,
+  "models": {
+    "A": {
+      "material": "3C92",
+      "checkpoint": "A_best_model.pth",
+      "checkpoint_sha256": "94a3c148fb17b20014cfb35e19162a08d7b8ea92cd5770cb0ff33e769e398ac0",
+      "parameter_count": 497793,
+      "output_shape": [
+        1,
+        1000
+      ],
+      "output_min": -0.23705916106700897,
+      "output_max": 0.309503972530365,
+      "output_mean": -0.01552600972354412,
+      "output_float32_sha256": "ae9be1011e8151b3908112f5304ded1bbf3b235c3958d27b4c67764efc0ce717",
+      "elapsed_seconds": 0.497983
+    },
+    "B": {
+      "material": "3C95",
+      "checkpoint": "B_best_model.pth",
+      "checkpoint_sha256": "866674253d241c2127434fd57f3acfe981f54e559ffcfdfb535363f7b6810b17",
+      "parameter_count": 2092545,
+      "output_shape": [
+        1,
+        1000
+      ],
+      "output_min": -0.29599905014038086,
+      "output_max": 0.20541271567344666,
+      "output_mean": -0.06079024448990822,
+      "output_float32_sha256": "8f97b42530024f32d9abbaeabebf30d09cc9d2286228a7a3f1de57d8d2f3409f",
+      "elapsed_seconds": 0.374781
+    },
+    "C": {
+      "material": "FEC007",
+      "checkpoint": "C_best_model.pth",
+      "checkpoint_sha256": "846a171e00a0b31b82932a0e1e7b01f4db413137b7cbcd82313afa1030be60d8",
+      "parameter_count": 2092545,
+      "output_shape": [
+        1,
+        1000
+      ],
+      "output_min": 0.06254851818084717,
+      "output_max": 0.9208332896232605,
+      "output_mean": 0.20530469715595245,
+      "output_float32_sha256": "7e7e5bd7655aa64090879ebb1dfcf9c52ecedaec9bc977b0de8d17688c585862",
+      "elapsed_seconds": 0.476021
+    },
+    "D": {
+      "material": "FEC014",
+      "checkpoint": "D_best_model.pth",
+      "checkpoint_sha256": "1ecb22936ca4c06d670f54d6cb425a2aaf5bcd39c16e99a5b616c6145e2e6f1b",
+      "parameter_count": 2512593,
+      "output_shape": [
+        1,
+        1000
+      ],
+      "output_min": -0.38371098041534424,
+      "output_max": 0.19320519268512726,
+      "output_mean": -0.03731828182935715,
+      "output_float32_sha256": "a9b2b78a399b64ed0f1bd05eac6d7927d8bd41b40e745fcc849ab0c0ddd8f172",
+      "elapsed_seconds": 0.432282
+    },
+    "E": {
+      "material": "T37",
+      "checkpoint": "E_best_model.pth",
+      "checkpoint_sha256": "85e43dea4d08a5b4909a5c2796b66fd2a5c404cabb6facb20779d69d0ef21d88",
+      "parameter_count": 2092865,
+      "output_shape": [
+        1,
+        1000
+      ],
+      "output_min": -0.41929030418395996,
+      "output_max": 0.2798900604248047,
+      "output_mean": 0.005960455164313316,
+      "output_float32_sha256": "7901059192f4d19ce2d2ecea6d9e0b40f7429c880de169e9c1572b749bd7ca60",
+      "elapsed_seconds": 0.419254
+    }
+  }
+}

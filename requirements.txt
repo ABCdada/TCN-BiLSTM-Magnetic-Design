@@ -1,0 +1,6 @@
+Flask>=3.0,<4
+numpy>=1.24,<3
+torch>=2.1
+waitress>=3.0,<4
+requests>=2.31,<3
+pytest>=8,<9

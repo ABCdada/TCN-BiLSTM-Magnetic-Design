@@ -1,0 +1,864 @@
+<!--
+    UI adapted from LSTM-DAO-Inference commit 59fdc474 (MIT); see licenses/LSTM-DAO-Inference-LICENSE.txt.
+    User Documentation Page
+    
+    This page provides comprehensive documentation for the AI Magnetic Design platform.
+    Features include:
+    - Searchable documentation
+    - Table of contents navigation
+    - Multiple documentation sections
+    - Code examples and usage instructions
+    
+    Dependencies:
+    - Tailwind CSS for styling
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Manual</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Chart line transition styles */
+        .chart-line {
+            transition: all 0.3s ease;
+        }
+        /* Code block styling */
+        pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+        }
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Document section content area scrolling */
+        .doc-section {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-height: 100%;
+        }
+        .doc-section > div:last-child {
+            overflow-y: auto;
+            flex: 1;
+            min-height: 0;
+        }
+        .toc-item.active {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            color: #1e293b;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aurora_theme.css') }}">
+</head>
+<body class="bg-gray-50">
+    <div class="h-screen overflow-hidden bg-gray-50 p-[13px]">
+        <div class="grid grid-cols-12 gap-[13px] h-full">
+            <!-- Left Panel - Table of Contents -->
+            <section class="col-span-3 flex flex-col gap-[13px] overflow-y-auto">
+                <!-- Search -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="bg-gray-100 px-[17px] py-[11px] border-b border-gray-200">
+                        <h2 class="text-gray-800 font-semibold text-base flex items-center gap-[7px]">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            Search Documentation
+                        </h2>
+                    </div>
+                    <div class="p-[13px]">
+                        <input type="text" id="search-input" placeholder="Search..." class="w-full px-[9px] py-[7px] bg-white border border-gray-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-gray-400">
+                    </div>
+                </div>
+
+                <!-- Table of Contents -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden flex-grow">
+                    <div class="bg-gray-100 px-[17px] py-[11px] border-b border-gray-200">
+                        <h2 class="text-gray-800 font-semibold text-base flex items-center gap-[7px]">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                            Table of Contents
+                        </h2>
+                    </div>
+                    <nav class="p-[9px]">
+                        <ul id="toc-list" class="space-y-[5px] text-base">
+                            <li><a href="#getting-started" class="toc-item block px-[9px] py-[7px] rounded text-gray-700 hover:bg-gray-100 cursor-pointer" data-section="getting-started">Getting Started</a></li>
+                            <li><a href="#test-center" class="toc-item block px-[9px] py-[7px] rounded text-gray-700 hover:bg-gray-100 cursor-pointer" data-section="test-center">Test Center <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full ml-1">New</span></a></li>
+                            <li><a href="#design-center" class="toc-item block px-[9px] py-[7px] rounded text-gray-700 hover:bg-gray-100 cursor-pointer" data-section="design-center">Design Center</a></li>
+                            <li><a href="#model-libraries" class="toc-item block px-[9px] py-[7px] rounded text-gray-700 hover:bg-gray-100 cursor-pointer" data-section="model-libraries">Model Libraries</a></li>
+                            <li><a href="#training" class="toc-item block px-[9px] py-[7px] rounded text-gray-700 hover:bg-gray-100 cursor-pointer" data-section="training">Model Training</a></li>
+                            <li><a href="#export" class="toc-item block px-[9px] py-[7px] rounded text-gray-700 hover:bg-gray-100 cursor-pointer" data-section="export">Export & Integration</a></li>
+                            <li><a href="#troubleshooting" class="toc-item block px-[9px] py-[7px] rounded text-gray-700 hover:bg-gray-100 cursor-pointer" data-section="troubleshooting">Troubleshooting</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+            <!-- Middle Panel - Main Content -->
+            <section class="col-span-6 flex flex-col gap-[13px] overflow-hidden">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden flex-grow flex flex-col">
+                    <!-- Getting Started -->
+                    <section id="getting-started" class="doc-section">
+                        <div class="bg-gray-100 px-[17px] py-[11px] border-b border-gray-200">
+                            <h2 class="text-gray-800 font-semibold text-base flex items-center gap-[7px]">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                Getting Started
+                            </h2>
+                        </div>
+                        <div class="p-[17px] space-y-[13px] text-base text-gray-700">
+                            <div>
+                                <h3 class="font-semibold text-base text-gray-800 mb-[9px]">Welcome to AI Magnetic Design</h3>
+                                <p class="mb-[9px]">AI Magnetic Design is a comprehensive platform for magnetic component design and analysis. The platform provides two complementary workflows:</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 gap-4">
+                                <div class="border-2 border-blue-200 bg-blue-50 rounded-lg p-4">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        <h4 class="font-bold text-blue-900">Test Center</h4>
+                                        <span class="text-xs bg-blue-200 text-blue-800 px-2 py-0.5 rounded">New</span>
+                                    </div>
+                                    <p class="text-sm text-blue-800 mb-2">For rapid AI-powered analysis of measured magnetic data. Upload B-field CSV files (16 MHz sampling) to predict H-field and evaluate the interval magnetic-energy exchange rate density.</p>
+                                    <p class="text-xs text-blue-700">Best for: Testing 3C92, 3C95, FEC014, and T37 trajectories and high-speed single-sequence analysis</p>
+                                </div>
+                                
+                                <div class="border-2 border-green-200 bg-green-50 rounded-lg p-4">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                                        </svg>
+                                        <h4 class="font-bold text-green-900">Design Center</h4>
+                                    </div>
+                                    <p class="text-sm text-green-800 mb-2">For interactive simulation and design of magnetic components using dedicated 3C92, 3C95, FEC014, and T37 native cold-start models. Configure operating conditions, choose a material, adjust core geometry, and visualize real-time behavior.</p>
+                                    <p class="text-xs text-green-700">Best for: New component design, topology simulation, parameter optimization</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">System Requirements</h4>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li>Modern web browser (Chrome, Firefox, Safari, Edge)</li>
+                                    <li>JavaScript enabled</li>
+                                    <li>Internet connection for AI prediction API (Test Center)</li>
+                                    <li>Recommended: 1920x1080 or higher resolution</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Test Center (New Page) -->
+                    <section id="test-center" class="doc-section hidden">
+                        <div class="bg-gray-100 px-[17px] py-[11px] border-b border-gray-200">
+                            <h2 class="text-gray-800 font-semibold text-base flex items-center gap-[7px]">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                                Test Center <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full ml-2">New Feature</span>
+                            </h2>
+                        </div>
+                        <div class="p-[17px] space-y-[13px] text-base text-gray-700">
+                            <div>
+                                <h3 class="font-semibold text-base text-gray-800 mb-[9px]">Overview</h3>
+                                <p class="mb-[9px]">The <strong>Test Center</strong> provides rapid AI-powered analysis for 3C92, 3C95, FEC014, and T37. Upload a magnetic flux-density sequence sampled at 16 MHz, select the material, and obtain its H-field prediction and interval magnetic-energy exchange rate density. For a closed steady-state B-H cycle, this density can be interpreted as core-loss density.</p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Workflow</h4>
+                                <ol class="list-decimal list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Upload B Data:</strong> Import a CSV file containing magnetic flux density (B) measurements (single line, comma-separated)</li>
+                                    <li><strong>Set Temperature:</strong> Adjust operating temperature (25-70°C) using the slider; changes trigger automatic re-prediction</li>
+                                    <li><strong>Select Material:</strong> Choose 3C92, 3C95, FEC014, or T37; each dedicated cold-start model requires only one zero H placeholder</li>
+                                    <li><strong>AI Prediction:</strong> The system automatically sends data to the AI model and retrieves H-field predictions</li>
+                                    <li><strong>View Results:</strong> Analyze the reconstructed B-H trajectory and interval magnetic-energy exchange rate density</li>
+                                </ol>
+                            </div>
+
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <h4 class="font-semibold mb-3 text-blue-900">Data Format Specification (B.csv)</h4>
+                                <p class="mb-3 text-sm">The input file must be a single-line CSV file with comma-separated values representing magnetic flux density:</p>
+                                <pre class="mb-3 text-xs">0.0012,0.0015,0.0018,0.0021,0.0024,...,0.0010</pre>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px] text-sm">
+                                    <li><strong>Format:</strong> Single row only, no headers, comma-separated</li>
+                                    <li><strong>Unit:</strong> Tesla (T) - not milliTesla</li>
+                                    <li><strong>Decimal:</strong> Use dot (.) as decimal separator</li>
+                                    <li><strong>Length:</strong> 2 to 200,000 uploaded points; long sequences are processed recursively</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Sampling Frequency & Time Parameters</h4>
+                                <p class="mb-[5px]">Test Center is optimized for high-speed magnetic measurements:</p>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                                    <table class="w-full text-sm">
+                                        <tbody class="divide-y divide-gray-200">
+                                            <tr>
+                                                <td class="py-2 font-medium text-gray-700">Sampling Frequency</td>
+                                                <td class="py-2 font-mono text-gray-900">16 MHz</td>
+                                                <td class="py-2 text-gray-600">16,000,000 samples/second</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 font-medium text-gray-700">Sampling Period (Δt)</td>
+                                                <td class="py-2 font-mono text-gray-900">6.25×10⁻⁵ ms</td>
+                                                <td class="py-2 text-gray-600">62.5 nanoseconds per point</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 font-medium text-gray-700">Total Time Calculation</td>
+                                                <td class="py-2 font-mono text-gray-900">T = (N - 1) × 6.25×10⁻⁵ ms</td>
+                                                <td class="py-2 text-gray-600">N = number of data points</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="mt-3 bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded">
+                                    <p class="text-yellow-800 text-sm"><strong>Important:</strong> The native model grid is 16 MHz. The compatibility endpoint resamples other grids to 16 MHz for inference, but the strict manuscript-evaluation endpoints should be used when measured historical H and exact evaluation control are required.</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Temperature Control</h4>
+                                <p class="mb-[5px]">The temperature slider allows you to specify operating conditions:</p>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Range:</strong> 25°C to 70°C</li>
+                                    <li><strong>Default:</strong> 25°C (room temperature)</li>
+                                    <li><strong>Auto-update:</strong> Changing temperature automatically triggers AI re-prediction with new thermal parameters</li>
+                                    <li><strong>Effect:</strong> Influences the predicted H trajectory and the derived magnetic-energy metric</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Model Scope</h4>
+                                <p class="mb-[5px]">The browser Test Center exposes the independent native single-sequence cold-start family:</p>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Four browser materials:</strong> 3C92, 3C95, FEC014, and T37 each use a material-specific cold-start checkpoint with one zero H placeholder</li>
+                                    <li><strong>Scientific APIs:</strong> remain separate and accept measured historical H for the original evaluation protocols</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Analysis Results</h4>
+                                <p class="mb-[5px]">Test Center provides three visualization panels:</p>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Magnetic-Energy Exchange Rate Density (W/m³):</strong> Horizontal bar chart calculated from the input B trajectory and AI-predicted H trajectory over the selected interval. It represents core-loss density only for a closed steady-state cycle.</li>
+                                    <li><strong>Magnetic Flux Density B (T):</strong> Time-domain display of the uploaded B-field sequence.</li>
+                                    <li><strong>Field Strength H (A/m):</strong> AI-predicted material-specific H-field response under the native cold-start protocol.</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Magnetic-Energy Calculation Method</h4>
+                                <p class="mb-[5px]">The displayed interval metric is obtained by integrating the predicted H trajectory along the submitted B trajectory and dividing by the interval duration:</p>
+                                <p class="mb-2 ml-[9px] font-mono text-sm bg-gray-100 p-2 rounded">p_interval = |∫ H dB| / Δt_interval</p>
+                                <p class="text-sm">At the native 16 MHz sampling rate, adjacent samples are separated by 62.5 ns. The numerical result is an interval magnetic-energy exchange rate density in W/m³. Only when the interval is a closed steady-state cycle does the loop integral represent irreversible hysteresis loss and the rate density become core-loss density; a non-closed transient interval also contains reversible energy exchange and the change in stored magnetic energy.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Design Center (Original Simulation Page) -->
+                    <section id="design-center" class="doc-section hidden">
+                        <div class="bg-gray-100 px-[17px] py-[11px] border-b border-gray-200">
+                            <h2 class="text-gray-800 font-semibold text-base flex items-center gap-[7px]">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                                </svg>
+                                Design Center
+                            </h2>
+                        </div>
+                        <div class="p-[17px] space-y-[13px] text-base text-gray-700">
+                            <div>
+                                <h3 class="font-semibold text-base text-gray-800 mb-[9px]">Overview</h3>
+                                <p class="mb-[9px]">The Design Center is the main workspace for designing magnetic components with real-time simulation capabilities. Unlike the Test Center (which analyzes existing data), the Design Center simulates inverter operation and calculates magnetic behavior based on circuit parameters and core geometry. It exposes dedicated 3C92, 3C95, FEC014, and T37 cold-start checkpoints; every model uses the native 1-known/999-predicted protocol with a single zero H anchor and therefore requires no measured historical H trajectory.</p>
+                                <p class="mb-[9px]">To reproduce the reference website numerically, the Design Center sends the points already produced by the browser simulation directly to the model instead of interpolating them to 16 MHz. The page retains 10 points per switching period, so the effective Design Center sampling rate is 10 times the selected switching frequency (0.75 MHz at the default 75 kHz). Predictions use consecutive, non-overlapping 1,000-point windows: the first window starts from H=0, and each later window receives the preceding window's final H as its boundary state. A short final window follows the reference site's padding-and-trimming rule. This compatibility path is separate from the fixed-16-MHz scientific evaluation API.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Core Parameters</h4>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>R (Outer Radius):</strong> User-defined outer radius of the toroidal core, measured in mm (Range: 1-500)</li>
+                                    <li><strong>r (Inner Radius):</strong> User-defined inner radius of the toroidal core, measured in mm (Range: 0-400 and r &lt; R)</li>
+                                    <li><strong>d (Height/Thickness):</strong> User-defined height or thickness of the toroidal core, measured in mm (Range: 1-2000)</li>
+                                    <li><strong>N (Number of Turns):</strong> The number of wire turns in the winding (Range: 5-200)</li>
+                                    <li><strong>Effective Cross-Sectional Area (Ae):</strong> Automatically calculated as Ae = (R - r) × d / 100, displayed in cm²</li>
+                                    <li><strong>Effective Magnetic Path Length (Le):</strong> Automatically calculated as Le = π × (R + r), displayed in mm</li>
+                                    <li><strong>Inductance (L):</strong> Core geometry and winding turns are supplied by the user. The AI model reconstructs H from the resulting B trajectory; material constants are not inferred from the display defaults.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Operating Conditions</h4>
+                                <p class="mb-[5px]">Configure inverter and grid parameters for simulation:</p>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Topology:</strong> The Design Center uses the single-phase converter topology
+                                        <ul class="list-circle list-inside ml-4 mt-1 space-y-1 text-sm">
+                                            <li>Single-Phase Full Bridge</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>DC Voltage:</strong> Input DC voltage (200-800V)</li>
+                                    <li><strong>Switching Frequency:</strong> Inverter switching frequency (5-100kHz)</li>
+                                    <li><strong>Filter Inductance (L):</strong> Grid-side filter inductance in mH (0-1.5)</li>
+                                    <li><strong>Filter Capacitance (C):</strong> Filter capacitance in μF (0-20)</li>
+                                    <li><strong>Grid Voltage:</strong> AC grid voltage in V (110-380)</li>
+                                    <li><strong>Grid Frequency:</strong> Grid frequency in Hz (50-60)</li>
+                                    <li><strong>Power:</strong> Target power output in W (0-15000)</li>
+                                    <li><strong>Grid Impedance:</strong> Line impedance in Ω (0-1)</li>
+                                    <li><strong>Harmonics:</strong> Optional injection of 3rd, 5th, and 7th harmonics (0-5%)</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Visualization Charts</h4>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Grid & Inverter Voltage:</strong> Dual-axis chart showing grid voltage (cyan) and inverter output voltage (orange) over time. Includes draggable handle for panning both synchronized charts.</li>
+                                    <li><strong>Inductor Voltage & Flux Linkage:</strong> Shows inductor voltage V_L (green) and magnetic flux linkage (yellow). Supports click-and-drag selection to trigger AI predictions on selected flux regions.</li>
+                                    <li><strong>Magnetic-Energy Result:</strong> Bar chart comparing interval magnetic-energy exchange rate density for the selected materials. <strong>Click a bar</strong> to activate that material's B-H curve visualization.</li>
+                                    <li><strong>Magnetic Flux Density (B):</strong> Displays B-field characteristics calculated from selected flux regions.</li>
+                                    <li><strong>Field Strength (H):</strong> AI-predicted H-field based on B and material properties.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Flux Selection for AI Prediction</h4>
+                                <p class="mb-[5px]">In the Inductor Voltage & Flux Linkage chart:</p>
+                                <ol class="list-decimal list-inside space-y-[5px] ml-[9px]">
+                                    <li>Click and drag horizontally to select a region of the flux curve</li>
+                                    <li>The selected region is highlighted with an orange bounding box</li>
+                                    <li>The system automatically calculates B = Flux / (Ae × N)</li>
+                                    <li>AI prediction is triggered to generate corresponding H-field</li>
+                                    <li>The interval magnetic-energy exchange rate density is calculated for the selected region; it is core-loss density only when the region forms a closed steady-state cycle</li>
+                                    <li><strong>Note:</strong> Selection clears when zooming or panning charts</li>
+                                </ol>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Chart Synchronization</h4>
+                                <p class="mb-[5px]">The voltage and flux charts are synchronized for consistent analysis:</p>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Zoom Sync:</strong> Zooming (mouse wheel) on either chart synchronizes both x-axes</li>
+                                    <li><strong>Pan Sync:</strong> Horizontal panning on either chart updates both views simultaneously</li>
+                                    <li><strong>Draggable Handle:</strong> Blue vertical handle on voltage chart allows synchronized panning of both charts</li>
+                                    <li><strong>Auto-reset:</strong> Any zoom/pan operation resets the flux selection to ensure data validity</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Power Control Parameters</h4>
+                                <p class="mb-[5px]">The simulation includes a PI controller for power regulation:</p>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Kp (Proportional Gain):</strong> Default 0.00004, adjustable range 0-0.0001</li>
+                                    <li><strong>Ki (Integral Gain):</strong> Default 0.8, adjustable range 0-2</li>
+                                    <li>Controller adjusts modulation index to track target power: Δm = Kp(P* - P) + Ki∫(P* - P)dt</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Simulation Details</h4>
+                                <p class="mb-[5px]">The Design Center runs a time-domain circuit simulation with the following characteristics:</p>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Simulation Duration:</strong> 5 grid cycles</li>
+                                    <li><strong>Time Step:</strong> Determined by switching frequency (100 steps per switching period)</li>
+                                    <li><strong>Integration Method:</strong> Explicit Euler for inductor current and flux linkage</li>
+                                    <li><strong>PWM Strategy:</strong> Sinusoidal PWM (SPWM) with triangular carrier</li>
+                                    <li><strong>Three-Level Modulation:</strong> Phase Disposition (PD) PWM for T-Type topology</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Model Libraries -->
+                    <section id="model-libraries" class="doc-section hidden">
+                        <div class="bg-gray-100 px-[17px] py-[11px] border-b border-gray-200">
+                            <h2 class="text-gray-800 font-semibold text-base flex items-center gap-[7px]">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                </svg>
+                                Model Libraries
+                            </h2>
+                        </div>
+                        <div class="p-[17px] space-y-[13px] text-base text-gray-700">
+                            <div>
+                                <h3 class="font-semibold text-base text-gray-800 mb-[9px]">Pre-trained Models</h3>
+                                <p class="mb-[9px]">The browser Test Center, Design Center, and Model Libraries expose 3C92, 3C95, FEC014, and T37. Their cold-start checkpoints accept B-only input, while the separate scientific API retains the complete research registry and its measured-history evaluation protocols.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Available Material Models</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-start gap-3 p-3 border rounded-lg">
+                                        <div class="w-3 h-3 rounded-full bg-blue-500 mt-1.5 flex-shrink-0"></div>
+                                        <div>
+                                            <strong>3C92</strong>
+                                            <p class="text-sm text-gray-600">Five-layer compact TCN with a two-layer BiLSTM; 497,793 trainable parameters.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 border rounded-lg">
+                                        <div class="w-3 h-3 rounded-full bg-green-500 mt-1.5 flex-shrink-0"></div>
+                                        <div>
+                                            <strong>3C95</strong>
+                                            <p class="text-sm text-gray-600">Seven-layer TCN-BiLSTM model used for cross-frequency evaluation.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 border rounded-lg">
+                                        <div class="w-3 h-3 rounded-full bg-red-500 mt-1.5 flex-shrink-0"></div>
+                                        <div>
+                                            <strong>FEC014</strong>
+                                            <p class="text-sm text-gray-600">Uses increased TCN channels and BiLSTM hidden dimensions for complex hysteresis.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 border rounded-lg">
+                                        <div class="w-3 h-3 rounded-full bg-purple-500 mt-1.5 flex-shrink-0"></div>
+                                        <div>
+                                            <strong>T37</strong>
+                                            <p class="text-sm text-gray-600">Adds the second flux-increment feature ddB to the standard input representation.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Model Architecture</h4>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Type:</strong> Temporal Convolutional Network with a bidirectional LSTM and fully connected regression layers</li>
+                                    <li><strong>Parameters:</strong> 497,793-2,512,593 trainable parameters, depending on the material</li>
+                                    <li><strong>BiLSTM Hidden Size:</strong> 96-208 units per direction, depending on the material model</li>
+                                    <li><strong>Regression Head:</strong> 128 hidden units followed by pointwise H output</li>
+                                    <li><strong>Input Features:</strong> B, dB, temperature, known H, and mask; the T37 model additionally uses ddB</li>
+                                    <li><strong>Output:</strong> Reconstructed H-field sequence (A/m) and magnetic-energy post-processing</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Temperature Dependence</h4>
+                                <p class="mb-[5px]">All models include temperature as an input over the measured 25-70°C range. The neural network learns the relationship between temperature, B, and the corresponding H trajectory.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Model Training -->
+                    <section id="training" class="doc-section hidden">
+                        <div class="bg-gray-100 px-[17px] py-[11px] border-b border-gray-200">
+                            <h2 class="text-gray-800 font-semibold text-base flex items-center gap-[7px]">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                                Model Training
+                            </h2>
+                        </div>
+                        <div class="p-[17px] space-y-[13px] text-base text-gray-700">
+                            <div>
+                                <h3 class="font-semibold text-base text-gray-800 mb-[9px]">Offline Training of Custom Models</h3>
+                                <p class="mb-[9px]">This public website is an inference release and does not train models in the browser. Custom models for proprietary materials or additional operating ranges are trained with the scripts in the offline reproducibility package, where datasets, checkpoints, logs, and compute resources remain under the user's control. The Model Libraries page lets users inspect 3C92, 3C95, FEC014, and T37 transfer-learning baselines and edit a locally saved hyperparameter configuration, while upload, training, and export actions remain offline-only.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Dataset Format</h4>
+                                <p class="mb-[5px]">Prepare a dataset directory or ZIP archive containing three CSV files with matching dimensions for the offline scripts:</p>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>H.csv:</strong> Magnetic field strength in A/m, shape (N, M)</li>
+                                    <li><strong>B.csv:</strong> Magnetic flux density in Tesla, shape (N, M)</li>
+                                    <li><strong>T.csv:</strong> Temperature in Celsius, shape (N, 1)</li>
+                                </ul>
+                                <p class="mt-2 text-sm text-gray-600">Where N is the number of samples and M is the time series length. All three files must have the same number of samples (N). Data is loaded using comma-separated values.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Offline Training Process</h4>
+                                <ol class="list-decimal list-inside space-y-[5px] ml-[9px]">
+                                    <li>Prepare H.csv, B.csv, and T.csv and keep the acquisition sequences separated before sliding-window extraction</li>
+                                    <li>Select 3C92, 3C95, FEC014, or T37 as the transfer-learning initialization; the Model Libraries selector shows the exact architecture metadata for each baseline</li>
+                                    <li>Edit epochs, learning rate, batch size, validation split, window stride, loss function, and frozen layers in Model Libraries; the configuration is saved in the browser for use with the offline script</li>
+                                    <li>Run the packaged training command in a controlled Python/PyTorch environment</li>
+                                    <li>Review the saved loss, sequence-error, and energy-error records</li>
+                                    <li>Use the generated PyTorch checkpoint (.pth) and training report; the website provides no browser download endpoint</li>
+                                </ol>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Hyperparameters</h4>
+                                <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                                    <table class="w-full text-sm">
+                                        <tbody class="divide-y divide-gray-200">
+                                            <tr>
+                                                <td class="py-2 font-medium">Epochs</td>
+                                                <td class="py-2">10 - 1000</td>
+                                                <td class="py-2 text-gray-600">Number of complete passes through dataset</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 font-medium">Learning Rate</td>
+                                                <td class="py-2">0.0001 - 0.1</td>
+                                                <td class="py-2 text-gray-600">Step size for gradient descent optimization</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 font-medium">Batch Size</td>
+                                                <td class="py-2">8 - 128</td>
+                                                <td class="py-2 text-gray-600">Samples processed before weight update</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 font-medium">Validation Split</td>
+                                                <td class="py-2">0.1 - 0.4</td>
+                                                <td class="py-2 text-gray-600">Fraction of data reserved for validation</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 font-medium">Window Stride</td>
+                                                <td class="py-2">1 - 1000</td>
+                                                <td class="py-2 text-gray-600">Sliding window step (window size fixed at 1000)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 font-medium">Loss Function</td>
+                                                <td class="py-2">MSE / RMSE / Energy Error</td>
+                                                <td class="py-2 text-gray-600">Optimization objective</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 font-medium">Frozen Layers</td>
+                                                <td class="py-2">0 - 3</td>
+                                                <td class="py-2 text-gray-600">Number of initial layers frozen during fine-tuning</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Training Metrics</h4>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Training/Validation Loss:</strong> Loss curves recorded by the offline training run (blue = training, green = validation)</li>
+                                    <li><strong>RMSE:</strong> Root Mean Square Error percentage vs. baseline model</li>
+                                    <li><strong>Energy Error:</strong> Relative discrepancy between measured- and predicted-H magnetic-energy integrals over the defined evaluation interval</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Transfer Learning</h4>
+                                <p class="mb-[5px]">The offline workflow uses the selected base checkpoint to accelerate convergence:</p>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li>Base model weights are loaded as starting point</li>
+                                    <li>Frozen layers preserve low-level feature extraction</li>
+                                    <li>Unfrozen layers adapt to new material characteristics</li>
+                                    <li>Particularly effective for materials similar to base ferrites</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Export & Integration -->
+                    <section id="export" class="doc-section hidden">
+                        <div class="bg-gray-100 px-[17px] py-[11px] border-b border-gray-200">
+                            <h2 class="text-gray-800 font-semibold text-base flex items-center gap-[7px]">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                Export & Integration
+                            </h2>
+                        </div>
+                        <div class="p-[17px] space-y-[13px] text-base text-gray-700">
+                            <div>
+                                <h3 class="font-semibold text-base text-gray-800 mb-[9px]">Offline Artifacts</h3>
+                                <p class="mb-[9px]">The offline scripts write trained checkpoints and analysis records directly to the configured output directory. The inference website does not expose training-artifact download endpoints.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Model Export</h4>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Model Weights (.pth):</strong> PyTorch checkpoint containing trained parameters for deployment in a compatible Python/PyTorch environment.</li>
+                                    <li><strong>Training Report:</strong> Saved experiment records can include:
+                                        <ul class="list-circle list-inside ml-4 mt-1 space-y-1 text-sm">
+                                            <li>Training and validation loss curves</li>
+                                            <li>Sequence-error and energy-error progress charts</li>
+                                            <li>Hyperparameter configuration table</li>
+                                            <li>Final performance metrics</li>
+                                            <li>Training time and convergence statistics</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">API Integration (Test Center)</h4>
+                                <p class="mb-[5px]">The Test Center uses the following REST API endpoint for predictions. You can integrate this into your own applications:</p>
+                                <pre class="text-xs mb-2">POST /api/predict-cold-start
+Content-Type: application/json
+
+{
+  "materialId": 3,             // 1..4 maps to 3C92, 3C95, FEC014, T37
+  "sample": {
+    "B": [0.001, 0.002, ...],  // Array of B values in Tesla
+    "T": 25,                    // Temperature in Celsius
+    "real_time": 0.0000625,    // Endpoint span in seconds
+    "duration_semantics": "endpoint_span"
+  }
+}</pre>
+                                <p class="text-sm"><strong>Response:</strong></p>
+                                <pre class="text-xs">{
+  "H_pred": [12.5, 13.2, ...],  // Predicted H values in A/m
+  "core_loss": 2.34             // Interval magnetic-energy exchange rate density in W/m^3
+}</pre>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Data Retention Policy</h4>
+                                <p class="mb-[5px]">The public inference service does not retain uploaded Test Center CSV data. Browser-based fine-tuning is disabled in this release; use the offline reproducibility package for controlled training.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Troubleshooting -->
+                    <section id="troubleshooting" class="doc-section hidden">
+                        <div class="bg-gray-100 px-[17px] py-[11px] border-b border-gray-200">
+                            <h2 class="text-gray-800 font-semibold text-base flex items-center gap-[7px]">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                                Troubleshooting
+                            </h2>
+                        </div>
+                        <div class="p-[17px] space-y-[13px] text-base text-gray-700">
+                            <div>
+                                <h3 class="font-semibold text-base text-gray-800 mb-[9px]">Common Issues</h3>
+                            </div>
+                            
+                            <div class="border-l-4 border-red-400 bg-red-50 p-3 rounded">
+                                <h4 class="font-semibold text-red-800 mb-1">Test Center: "No valid data found in file"</h4>
+                                <ul class="list-disc list-inside text-sm text-red-700 ml-2">
+                                    <li>Ensure the CSV is single-line format (no row headers)</li>
+                                    <li>Check that values are comma-separated without extra spaces</li>
+                                    <li>Verify decimal points use dots (.) not commas</li>
+                                    <li>Ensure file extension is .csv and encoding is UTF-8</li>
+                                    <li>Check that B values are in Tesla, not milliTesla</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-orange-400 bg-orange-50 p-3 rounded">
+                                <h4 class="font-semibold text-orange-800 mb-1">Test Center: Unexpected Magnetic-Energy Metric</h4>
+                                <ul class="list-disc list-inside text-sm text-orange-700 ml-2">
+                                    <li>Verify data was sampled at 16 MHz (6.25×10⁻⁵ ms intervals)</li>
+                                    <li>If using different sampling rate, resample data before upload</li>
+                                    <li>Use one or more complete steady-state cycles when interpreting the result as core-loss density</li>
+                                    <li>Check temperature setting matches measurement conditions</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-yellow-400 bg-yellow-50 p-3 rounded">
+                                <h4 class="font-semibold text-yellow-800 mb-1">Design Center: Simulation Not Updating</h4>
+                                <ul class="list-disc list-inside text-sm text-yellow-700 ml-2">
+                                    <li>Check that R > r (outer radius must be larger than inner radius)</li>
+                                    <li>Verify all parameters are within valid ranges</li>
+                                    <li>Ensure DC voltage > Grid voltage for proper operation</li>
+                                    <li>Check browser console for JavaScript errors</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-blue-400 bg-blue-50 p-3 rounded">
+                                <h4 class="font-semibold text-blue-800 mb-1">AI Prediction Failed</h4>
+                                <ul class="list-disc list-inside text-sm text-blue-700 ml-2">
+                                    <li>Check internet connection to API endpoint</li>
+                                    <li>Long selections require multiple sequential model windows; allow the request to finish or choose a shorter interval if it times out</li>
+                                    <li>Verify that the selected 3C92, 3C95, FEC014, or T37 cold-start checkpoint is available and integrity-verified by the server</li>
+                                    <li>Check browser console for detailed error messages</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Performance Tips</h4>
+                                <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
+                                    <li><strong>Test Center:</strong> For large datasets (>100k points), consider downsampling to improve prediction speed</li>
+                                    <li><strong>Design Center:</strong> Long selections are supported but take proportionally longer because their model windows are evaluated sequentially</li>
+                                    <li><strong>General:</strong> Clear browser cache if charts fail to render or display outdated data</li>
+                                    <li><strong>Mobile:</strong> Use desktop browser for best experience; mobile view is limited</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-[5px]">Service Diagnostics</h4>
+                                <p class="text-sm">Use the built-in <a class="text-blue-600 hover:underline" href="/health" target="_blank">service status endpoint</a> to check model availability and deployment health.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </section>
+
+            <!-- Right Panel - Quick Reference -->
+            <section class="col-span-3 flex flex-col gap-[13px] overflow-y-auto">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden flex-grow">
+                    <div class="bg-gray-100 px-[17px] py-[11px] border-b border-gray-200">
+                        <h2 class="text-gray-800 font-semibold text-base flex items-center gap-[7px]">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Quick Reference
+                        </h2>
+                    </div>
+                    <div class="p-[13px] space-y-4">
+                        <!-- Test Center Specs -->
+                        <div class="bg-blue-50 rounded-lg p-3 border border-blue-200">
+                            <h3 class="font-bold text-blue-900 text-sm mb-2">Test Center Specs</h3>
+                            <div class="space-y-1 text-xs text-blue-800">
+                                <div class="flex justify-between">
+                                    <span>Sampling Rate:</span>
+                                    <span class="font-mono">16 MHz</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Time Resolution:</span>
+                                    <span class="font-mono">6.25×10⁻⁵ ms</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Input Unit (B):</span>
+                                    <span class="font-mono">Tesla (T)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Output Unit (H):</span>
+                                    <span class="font-mono">A/m</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Energy-Rate Density:</span>
+                                    <span class="font-mono">W/m³</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Temp Range:</span>
+                                    <span class="font-mono">25-70°C</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Design Center Params -->
+                        <div class="bg-green-50 rounded-lg p-3 border border-green-200">
+                            <h3 class="font-bold text-green-900 text-sm mb-2">Design Center Params</h3>
+                            <div class="space-y-1 text-xs text-green-800">
+                                <div class="flex justify-between">
+                                    <span>R (Outer):</span>
+                                    <span class="font-mono">10-500 mm</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>r (Inner):</span>
+                                    <span class="font-mono">5-400 mm</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>d (Height):</span>
+                                    <span class="font-mono">5-2000 mm</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>N (Turns):</span>
+                                    <span class="font-mono">5-200</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Switching Freq:</span>
+                                    <span class="font-mono">5-100 kHz</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Model Info -->
+                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                            <h3 class="font-bold text-gray-900 text-sm mb-2">Model Info</h3>
+                            <div class="space-y-1 text-xs text-gray-700">
+                                <div class="flex justify-between">
+                                    <span>Type:</span>
+                                    <span>TCN-BiLSTM</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Parameters:</span>
+                                    <span>0.50-2.51 M</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Materials:</span>
+                                    <span>5 available</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Support -->
+                        <div class="border-t border-gray-200 pt-3">
+                            <h3 class="font-semibold text-gray-800 text-sm mb-2">Service Status</h3>
+                            <div class="flex items-center gap-2 text-xs text-gray-600">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <a class="text-blue-600 hover:underline" href="/health" target="_blank">Open health check</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Table of contents navigation
+        const tocItems = document.querySelectorAll('.toc-item');
+        const docSections = document.querySelectorAll('.doc-section');
+
+        tocItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetSection = item.getAttribute('data-section');
+                
+                // Update active state
+                tocItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                
+                // Show target section
+                docSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+                const target = document.getElementById(targetSection);
+                if (target) {
+                    target.classList.remove('hidden');
+                }
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            
+            if (query.length === 0) {
+                // Reset to default view
+                docSections.forEach(section => section.classList.add('hidden'));
+                document.getElementById('getting-started').classList.remove('hidden');
+                tocItems.forEach(i => i.classList.remove('active'));
+                document.querySelector('[data-section="getting-started"]').classList.add('active');
+                return;
+            }
+
+            // Search in all sections
+            let firstMatch = null;
+            docSections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    section.classList.remove('hidden');
+                    if (!firstMatch) firstMatch = section.id;
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+
+            if (firstMatch) {
+                tocItems.forEach(i => {
+                    i.classList.toggle('active', i.getAttribute('data-section') === firstMatch);
+                });
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'f') {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+
+        // Initialize: show getting started section
+        document.getElementById('getting-started').classList.remove('hidden');
+        document.querySelector('[data-section="getting-started"]').classList.add('active');
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+known_samples,predicted_samples,sequence_relative_error_percent,energy_relative_error_percent,sampling_rate_hz,switching_frequency_hz,core_material,inductance_uH,input_voltage_rms_V,output_voltage_rms_V,provenance
+100,900,6.20,6.46,16000000,100000,3C90,145,20,50,"independently measured PFC validation in revised manuscript"
+500,500,4.91,1.92,16000000,100000,3C90,145,20,50,"independently measured PFC validation in revised manuscript"
+900,100,4.32,1.51,16000000,100000,3C90,145,20,50,"independently measured PFC validation in revised manuscript"
+
