@@ -1,4 +1,3 @@
-# Python
 __pycache__/
 *.py[cod]
 *.pyd
@@ -7,25 +6,18 @@ __pycache__/
 .ruff_cache/
 .coverage
 htmlcov/
-build/
-dist/
-ci_dist/
-*.egg-info/
 
-# Environments and editor files
 .venv/
 venv/
 env/
 .env
 .env.*
-!.env.example
 .idea/
 .vscode/
 *.swp
 .DS_Store
 Thumbs.db
 
-# Credentials and private keys must never enter a release archive.
 *.pem
 *.key
 *.p12
@@ -33,7 +25,6 @@ Thumbs.db
 credentials*.json
 secrets*.json
 
-# Runtime artifacts
 uploads/
 outputs/
 logs/
@@ -43,14 +34,12 @@ tmp/
 environment.lock.txt
 verification_*.json
 
-# Standard SSH private-key names (including extensionless keys).
 .ssh/
 id_rsa*
 id_dsa*
 id_ecdsa*
 id_ed25519*
 
-# Trained parameters can be very large and may have separate usage rights.
 weights/**/*.pth
 weights/**/*.pt
 weights/**/*.ckpt
@@ -61,7 +50,3 @@ weights/*.ckpt
 weights/*.bin
 !weights/manifest.json
 !weights/cold_start_manifest.json
-!weights/README.md
-
-# Generated examples (regenerate with scripts/generate_sample_inputs.py)
-examples/generated/

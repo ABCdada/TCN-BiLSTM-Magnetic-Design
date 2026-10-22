@@ -165,7 +165,7 @@
                                 <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
                                     <li>Modern web browser (Chrome, Firefox, Safari, Edge)</li>
                                     <li>JavaScript enabled</li>
-                                    <li>Internet connection for AI prediction API (Test Center)</li>
+                                    <li>Internet connection to load Tailwind CSS and chart libraries from public CDNs</li>
                                     <li>Recommended: 1920x1080 or higher resolution</li>
                                 </ul>
                             </div>
@@ -463,11 +463,11 @@
                         <div class="p-[17px] space-y-[13px] text-base text-gray-700">
                             <div>
                                 <h3 class="font-semibold text-base text-gray-800 mb-[9px]">Offline Training of Custom Models</h3>
-                                <p class="mb-[9px]">This public website is an inference release and does not train models in the browser. Custom models for proprietary materials or additional operating ranges are trained with the scripts in the offline reproducibility package, where datasets, checkpoints, logs, and compute resources remain under the user's control. The Model Libraries page lets users inspect 3C92, 3C95, FEC014, and T37 transfer-learning baselines and edit a locally saved hyperparameter configuration, while upload, training, and export actions remain offline-only.</p>
+                                <p class="mb-[9px]">This public website is an inference release and does not include model-training scripts, training datasets, or browser training. Custom models for proprietary materials or additional operating ranges must be trained in a separately maintained offline environment. The Model Libraries page lets users inspect 3C92, 3C95, FEC014, and T37 transfer-learning baselines and edit a locally saved hyperparameter configuration for reference.</p>
                             </div>
                             <div>
                                 <h4 class="font-semibold mb-[5px]">Dataset Format</h4>
-                                <p class="mb-[5px]">Prepare a dataset directory or ZIP archive containing three CSV files with matching dimensions for the offline scripts:</p>
+                                <p class="mb-[5px]">A compatible external training workflow can use three CSV files with matching dimensions:</p>
                                 <ul class="list-disc list-inside space-y-[5px] ml-[9px]">
                                     <li><strong>H.csv:</strong> Magnetic field strength in A/m, shape (N, M)</li>
                                     <li><strong>B.csv:</strong> Magnetic flux density in Tesla, shape (N, M)</li>
@@ -480,8 +480,8 @@
                                 <ol class="list-decimal list-inside space-y-[5px] ml-[9px]">
                                     <li>Prepare H.csv, B.csv, and T.csv and keep the acquisition sequences separated before sliding-window extraction</li>
                                     <li>Select 3C92, 3C95, FEC014, or T37 as the transfer-learning initialization; the Model Libraries selector shows the exact architecture metadata for each baseline</li>
-                                    <li>Edit epochs, learning rate, batch size, validation split, window stride, loss function, and frozen layers in Model Libraries; the configuration is saved in the browser for use with the offline script</li>
-                                    <li>Run the packaged training command in a controlled Python/PyTorch environment</li>
+                                    <li>Edit epochs, learning rate, batch size, validation split, window stride, loss function, and frozen layers in Model Libraries; the reference configuration is saved in the browser</li>
+                                    <li>Implement and run training in a separately maintained Python/PyTorch environment</li>
                                     <li>Review the saved loss, sequence-error, and energy-error records</li>
                                     <li>Use the generated PyTorch checkpoint (.pth) and training report; the website provides no browser download endpoint</li>
                                 </ol>
@@ -564,7 +564,7 @@
                         <div class="p-[17px] space-y-[13px] text-base text-gray-700">
                             <div>
                                 <h3 class="font-semibold text-base text-gray-800 mb-[9px]">Offline Artifacts</h3>
-                                <p class="mb-[9px]">The offline scripts write trained checkpoints and analysis records directly to the configured output directory. The inference website does not expose training-artifact download endpoints.</p>
+                                <p class="mb-[9px]">A separate offline training workflow should write trained checkpoints and analysis records to its configured output directory. The inference website does not generate or expose training artifacts.</p>
                             </div>
                             <div>
                                 <h4 class="font-semibold mb-[5px]">Model Export</h4>
@@ -604,7 +604,7 @@ Content-Type: application/json
                             </div>
                             <div>
                                 <h4 class="font-semibold mb-[5px]">Data Retention Policy</h4>
-                                <p class="mb-[5px]">The public inference service does not retain uploaded Test Center CSV data. Browser-based fine-tuning is disabled in this release; use the offline reproducibility package for controlled training.</p>
+                                <p class="mb-[5px]">The public inference service does not retain uploaded Test Center CSV data. Browser-based fine-tuning is disabled, and training tools are not included in this deployment.</p>
                             </div>
                         </div>
                     </section>
@@ -658,7 +658,7 @@ Content-Type: application/json
                             <div class="border-l-4 border-blue-400 bg-blue-50 p-3 rounded">
                                 <h4 class="font-semibold text-blue-800 mb-1">AI Prediction Failed</h4>
                                 <ul class="list-disc list-inside text-sm text-blue-700 ml-2">
-                                    <li>Check internet connection to API endpoint</li>
+                                    <li>Confirm the local website process is running and the browser can reach its API endpoint</li>
                                     <li>Long selections require multiple sequential model windows; allow the request to finish or choose a shorter interval if it times out</li>
                                     <li>Verify that the selected 3C92, 3C95, FEC014, or T37 cold-start checkpoint is available and integrity-verified by the server</li>
                                     <li>Check browser console for detailed error messages</li>

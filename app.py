@@ -1,4 +1,4 @@
-"""Flask application exposing reproducible magnetic-model inference APIs."""
+"""Flask application for the magnetic-design website and inference APIs."""
 
 from __future__ import annotations
 
@@ -8,12 +8,9 @@ from pathlib import Path
 
 from flask import (
     Flask,
-    abort,
     jsonify,
     render_template,
     request,
-    send_file,
-    send_from_directory,
 )
 from werkzeug.exceptions import HTTPException, RequestEntityTooLarge
 
@@ -35,16 +32,6 @@ def create_app(config: dict | None = None) -> Flask:
         source_root / "static"
         if (source_root / "static").is_dir()
         else installed_root / "static"
-    )
-    license_root = (
-        source_root / "licenses"
-        if (source_root / "licenses").is_dir()
-        else installed_root / "licenses"
-    )
-    artifact_root = (
-        source_root
-        if (source_root / "results").is_dir()
-        else installed_root
     )
     weights_root = (
         source_root / "weights"
@@ -89,77 +76,17 @@ def create_app(config: dict | None = None) -> Flask:
     cold_service = InferenceService(cold_manager)
     application.extensions["cold_start_magnetic_service"] = cold_service
 
-    downloadable_artifacts = {
-        "paper-p95-csv": {
-            "title": "A-E manuscript P95 metrics (CSV)",
-            "path": artifact_root / "results" / "paper_evaluation" / "p95_metrics.csv",
-            "kind": "Reported manuscript metric",
-        },
-        "paper-metrics-json": {
-            "title": "A-E manuscript metrics (JSON)",
-            "path": artifact_root / "results" / "paper_evaluation" / "paper_metrics.json",
-            "kind": "Reported manuscript metric",
-        },
-        "pfc-validation-csv": {
-            "title": "Independent PFC validation metrics (CSV)",
-            "path": artifact_root / "results" / "pfc_validation_metrics.csv",
-            "kind": "Independent measured validation",
-        },
-        "pareto-sequence-svg": {
-            "title": "Parameter versus sequence-P95 comparison (SVG)",
-            "path": artifact_root / "results" / "paper_evaluation" / "pareto_comparison" / "pareto_sequence_p95.svg",
-            "kind": "Editable vector figure",
-        },
-        "pareto-energy-svg": {
-            "title": "Parameter versus energy-P95 comparison (SVG)",
-            "path": artifact_root / "results" / "paper_evaluation" / "pareto_comparison" / "pareto_energy_p95.svg",
-            "kind": "Editable vector figure",
-        },
-        "synthetic-upload-csv": {
-            "title": "Four-material Test Center B-only upload example (CSV)",
-            "path": artifact_root / "static" / "resources" / "B_TestCenter.csv",
-            "kind": "Material-independent browser input fixture",
-        },
-        "synthetic-finetune-format": {
-            "title": "Fine-tuning data-format example (ZIP)",
-            "path": artifact_root / "examples" / "data" / "synthetic_finetune_format.zip",
-            "kind": "Synthetic format-only fixture",
-        },
-        "synthetic-manifest-json": {
-            "title": "Reproducible-example manifest (JSON)",
-            "path": artifact_root / "results" / "reproducible_examples" / "manifest.json",
-            "kind": "Synthetic software verification",
-        },
-        "gpu-verification-json": {
-            "title": "AutoDL GPU checkpoint verification (JSON)",
-            "path": artifact_root / "results" / "verification" / "verification_autodl_gpu.json",
-            "kind": "Software and artifact verification",
-        },
-    }
-
     @application.get("/")
     def index():
         return render_template("index.html")
-
-    @application.get("/predict")
-    def predict_page():
-        return render_template("predict.html")
 
     @application.get("/test")
     def reference_test_page():
         return render_template("test.html")
 
-    @application.get("/circuit")
-    def circuit_page():
-        return render_template("circuit.html")
-
     @application.get("/design")
     def reference_design_page():
         return render_template("design.html")
-
-    @application.get("/docs")
-    def docs_page():
-        return render_template("docs.html")
 
     @application.get("/document")
     def reference_document_page():
@@ -169,40 +96,6 @@ def create_app(config: dict | None = None) -> Flask:
     def reference_model_library_page():
         return render_template("fine_tune.html")
 
-    @application.get("/resources")
-    def resources_page():
-        artifacts = [
-            {
-                "id": artifact_id,
-                "title": item["title"],
-                "kind": item["kind"],
-                "available": item["path"].is_file(),
-                "filename": item["path"].name,
-            }
-            for artifact_id, item in downloadable_artifacts.items()
-        ]
-        return render_template("resources.html", artifacts=artifacts)
-
-    @application.get("/downloads/<artifact_id>")
-    def download_artifact(artifact_id: str):
-        item = downloadable_artifacts.get(artifact_id)
-        if item is None or not item["path"].is_file():
-            abort(404)
-        return send_file(
-            item["path"],
-            as_attachment=True,
-            download_name=item["path"].name,
-            conditional=True,
-        )
-
-    @application.get("/resources/<path:resource_name>")
-    def reference_resource(resource_name: str):
-        return send_from_directory(static_root / "resources", resource_name)
-
-    @application.get("/licenses/<path:license_name>")
-    def license_text(license_name: str):
-        return send_from_directory(license_root, license_name)
-
     @application.get("/health")
     def health():
         models = service.manager.public_models()
@@ -210,7 +103,7 @@ def create_app(config: dict | None = None) -> Flask:
         return jsonify(
             {
                 "status": "ok",
-                "version": "1.3.2",
+                "version": "1.3.3",
                 "device": str(service.manager.device),
                 "loaded_models": service.manager.loaded_materials,
                 "available_models": [item["id"] for item in models if item["available"]],
@@ -264,8 +157,7 @@ def create_app(config: dict | None = None) -> Flask:
                 {
                     "error": (
                         "Browser-side training is not enabled in this inference release. "
-                        "Use the reproducible offline training workflow and the downloadable "
-                        "data-format example from the Resources page."
+                        "Use a separately maintained offline training environment."
                     )
                 }
             ),

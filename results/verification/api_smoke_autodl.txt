@@ -1,9 +1,0 @@
-predict A 200 1000 900
-predict B 200 1000 900
-predict C 200 1000 999
-predict D 200 1000 900
-predict E 200 1000 900
-converter single_phase_full_bridge 200 1000
-converter three_phase_full_bridge 200 1000
-converter three_phase_t_type 200 1000
-health 200 {'available_models': ['A', 'B', 'C', 'D', 'E'], 'device': 'cuda', 'loaded_models': ['A', 'B', 'C', 'D', 'E'], 'status': 'ok', 'version': '1.1.0'}

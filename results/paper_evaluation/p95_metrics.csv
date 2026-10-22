@@ -1,7 +1,0 @@
-material_id,grade,sequence_p95_percent,energy_p95_percent,aggregation,provenance
-A,3C92,12.98,0.96,"average over 900-100, 500-500, and 100-900 scenarios","reported in revised manuscript Tables IV-V"
-B,3C95,4.30,0.79,"average over 900-100, 500-500, and 100-900 scenarios","reported in revised manuscript Tables IV-V"
-C,FEC007,11.09,3.49,"material-specific cold-start evaluation","reported in revised manuscript Tables IV-V"
-D,FEC014,5.40,1.32,"average over 900-100, 500-500, and 100-900 scenarios","reported in revised manuscript Tables IV-V"
-E,T37,5.41,0.41,"average over 900-100, 500-500, and 100-900 scenarios","reported in revised manuscript Tables IV-V"
-mean,A-E,7.84,1.39,"arithmetic mean of the five material-level P95 values","reported in manuscript Table IV"
