@@ -10,6 +10,12 @@ Portions of this website's application framework and user-interface design are a
 
 This repository replaces and extends the magnetic-model inference components with a TCN-BiLSTM backend and material-specific workflows. The adapted-file scope, upstream revision, original copyright, and MIT license notice are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
+### Development lineage
+
+- **Upstream foundation:** [LSTM-DAO-Inference](https://github.com/ouihon/LSTM-DAO-Inference), developed by the Magnetic Design Team for MagNet Challenge II, provided the original web-application structure and UI design. The adapted baseline is recorded at upstream commit [`59fdc474`](https://github.com/ouihon/LSTM-DAO-Inference/commit/59fdc474c3e9a8b2b8e2be88bf936169330a6f13).
+- **This project:** The interface was adapted for a separate TCN-BiLSTM inference backend, material-specific cold-start workflows, model verification, and local deployment.
+- **History and licensing:** The upstream development history remains available in the original repository. This repository records the subsequent TCN-BiLSTM-specific development; copyright, adapted-file scope, and MIT license details are retained in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
 ## Main features
 
 - **Design Center** — simulate a single-phase full-bridge operating condition, configure toroidal-core dimensions, predict the `H` trajectory, and calculate the displayed magnetic-energy/loss result.
