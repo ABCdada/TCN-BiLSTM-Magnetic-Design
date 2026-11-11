@@ -2,6 +2,12 @@
 
 这是一个可在个人电脑上部署的磁场强度预测与磁性元件设计网站。项目已经把训练好的 TCN-BiLSTM 模型、后端接口和网页界面整合在一起，下载完整部署包后即可运行。
 
+## 原项目来源与致谢
+
+本网站的部分应用框架与用户界面设计基于 Magnetic Design Team 为 MagNet Challenge II 开发的 [LSTM-DAO-Inference](https://github.com/ouihon/LSTM-DAO-Inference) 改编。衷心感谢原项目作者及所有参与同学在界面设计与开源工作方面的贡献。
+
+本仓库在此基础上替换并扩展了 TCN-BiLSTM 磁滞建模后端及材料相关流程。具体改编文件、上游版本、原版权和 MIT 许可证说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
 ## 主要功能
 
 - **Design Center**：设置单相全桥工况和环形磁芯尺寸，生成磁通密度序列，预测磁场强度 `H`，并计算页面展示的磁能量/损耗结果。

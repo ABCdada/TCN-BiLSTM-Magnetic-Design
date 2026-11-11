@@ -4,6 +4,12 @@
 
 A local web application for magnetic-field trajectory prediction and magnetic-component design. The website packages trained TCN-BiLSTM models behind a browser interface, so it can be deployed and used on a personal computer without building a separate frontend or API service.
 
+## Upstream project and acknowledgment
+
+Portions of this website's application framework and user-interface design are adapted from [LSTM-DAO-Inference](https://github.com/ouihon/LSTM-DAO-Inference), developed by the Magnetic Design Team for MagNet Challenge II. We sincerely thank the original authors and contributors for their interface design and open-source work.
+
+This repository replaces and extends the magnetic-model inference components with a TCN-BiLSTM backend and material-specific workflows. The adapted-file scope, upstream revision, original copyright, and MIT license notice are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
 ## Main features
 
 - **Design Center** — simulate a single-phase full-bridge operating condition, configure toroidal-core dimensions, predict the `H` trajectory, and calculate the displayed magnetic-energy/loss result.
