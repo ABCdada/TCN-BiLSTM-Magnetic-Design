@@ -8,6 +8,8 @@ A local web application for magnetic-field trajectory prediction and magnetic-co
 
 Portions of this website's application framework and user-interface design are adapted from [LSTM-DAO-Inference](https://github.com/ouihon/LSTM-DAO-Inference), developed by the Magnetic Design Team for MagNet Challenge II. We sincerely thank the original authors and contributors for their interface design and open-source work.
 
+Publicly credited upstream contributors include **Liping Mo, Yibo Wang, Yue Liu, Weipeng Wang, and Sheng Ren**. This is a partial, non-exhaustive list; we also thank every upstream contributor not individually named here.
+
 This repository replaces and extends the magnetic-model inference components with a TCN-BiLSTM backend and material-specific workflows. The adapted-file scope, upstream revision, original copyright, and MIT license notice are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ### Development lineage

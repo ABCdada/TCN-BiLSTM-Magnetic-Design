@@ -16,6 +16,10 @@ full license text is provided at
 model weights and material registry are supplied by this
 project and are not part of, or endorsed by, the upstream project.
 
+Publicly credited upstream contributors include Liping Mo, Yibo Wang, Yue
+Liu, Weipeng Wang, and Sheng Ren. This is a partial, non-exhaustive list; all
+other upstream contributors are acknowledged as well.
+
 Adapted upstream files comprise `templates/index.html`, `design.html`,
 `test.html`, `document.html`, and `fine_tune.html`, together with selected
 assets under `static/images/`. The upstream LSTM-DAO model code, weights, and
