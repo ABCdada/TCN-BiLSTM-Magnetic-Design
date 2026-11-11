@@ -6,7 +6,17 @@
 
 本网站的部分应用框架与用户界面设计基于 Magnetic Design Team 为 MagNet Challenge II 开发的 [LSTM-DAO-Inference](https://github.com/ouihon/LSTM-DAO-Inference) 改编。衷心感谢原项目作者及所有参与同学在界面设计与开源工作方面的贡献。
 
-原项目公开署名的部分贡献者包括 **Liping Mo、Yibo Wang、Yue Liu、Weipeng Wang 和 Sheng Ren**。以上仅为部分名单，并非完整贡献者列表；同时感谢所有未逐一列名的上游贡献者。
+原网站公开展示的 **HFUT-CityUHK-XMU Team** 信息如下：
+
+| 团队成员 | 公开联系方式 |
+| --- | --- |
+| Liping Mo | [lipingmo@hfut.edu.cn](mailto:lipingmo@hfut.edu.cn) |
+| Yibo Wang | [yibo.wang@my.cityu.edu.hk](mailto:yibo.wang@my.cityu.edu.hk) |
+| Yue Liu | [yueliu@cityu.edu.hk](mailto:yueliu@cityu.edu.hk) |
+| Weipeng Wang | [vpengwang@gmail.com](mailto:vpengwang@gmail.com) |
+| Sheng Ren | [shengren3-c@my.cityu.edu.hk](mailto:shengren3-c@my.cityu.edu.hk) |
+
+以上完整保留了所参考上游界面中公开展示的团队与联系方式。这些人员属于原项目公开署名的部分贡献者，并非完整贡献者列表；同时感谢所有未逐一列名的上游贡献者。
 
 本仓库在此基础上替换并扩展了 TCN-BiLSTM 磁滞建模后端及材料相关流程。具体改编文件、上游版本、原版权和 MIT 许可证说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 

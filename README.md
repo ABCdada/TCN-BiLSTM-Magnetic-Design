@@ -8,7 +8,17 @@ A local web application for magnetic-field trajectory prediction and magnetic-co
 
 Portions of this website's application framework and user-interface design are adapted from [LSTM-DAO-Inference](https://github.com/ouihon/LSTM-DAO-Inference), developed by the Magnetic Design Team for MagNet Challenge II. We sincerely thank the original authors and contributors for their interface design and open-source work.
 
-Publicly credited upstream contributors include **Liping Mo, Yibo Wang, Yue Liu, Weipeng Wang, and Sheng Ren**. This is a partial, non-exhaustive list; we also thank every upstream contributor not individually named here.
+The upstream website publicly credits the following members of the **HFUT-CityUHK-XMU Team**:
+
+| Team member | Public contact |
+| --- | --- |
+| Liping Mo | [lipingmo@hfut.edu.cn](mailto:lipingmo@hfut.edu.cn) |
+| Yibo Wang | [yibo.wang@my.cityu.edu.hk](mailto:yibo.wang@my.cityu.edu.hk) |
+| Yue Liu | [yueliu@cityu.edu.hk](mailto:yueliu@cityu.edu.hk) |
+| Weipeng Wang | [vpengwang@gmail.com](mailto:vpengwang@gmail.com) |
+| Sheng Ren | [shengren3-c@my.cityu.edu.hk](mailto:shengren3-c@my.cityu.edu.hk) |
+
+This reproduces the complete team-and-contact block shown in the referenced upstream interface. These are publicly credited contributors and remain a partial, non-exhaustive contributor list; we also thank every upstream contributor not individually named here.
 
 This repository replaces and extends the magnetic-model inference components with a TCN-BiLSTM backend and material-specific workflows. The adapted-file scope, upstream revision, original copyright, and MIT license notice are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 

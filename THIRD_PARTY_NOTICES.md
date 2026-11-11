@@ -16,9 +16,13 @@ full license text is provided at
 model weights and material registry are supplied by this
 project and are not part of, or endorsed by, the upstream project.
 
-Publicly credited upstream contributors include Liping Mo, Yibo Wang, Yue
-Liu, Weipeng Wang, and Sheng Ren. This is a partial, non-exhaustive list; all
-other upstream contributors are acknowledged as well.
+The upstream interface publicly displays the following HFUT-CityUHK-XMU Team
+members and contacts: Liping Mo (`lipingmo@hfut.edu.cn`), Yibo Wang
+(`yibo.wang@my.cityu.edu.hk`), Yue Liu (`yueliu@cityu.edu.hk`), Weipeng Wang
+(`vpengwang@gmail.com`), and Sheng Ren (`shengren3-c@my.cityu.edu.hk`). This
+reproduces the complete team-and-contact block shown in the referenced upstream
+interface, but it remains a partial, non-exhaustive contributor list. All other
+upstream contributors are acknowledged as well.
 
 Adapted upstream files comprise `templates/index.html`, `design.html`,
 `test.html`, `document.html`, and `fine_tune.html`, together with selected
